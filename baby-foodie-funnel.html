@@ -8,7 +8,7 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,600;0,700;0,800;0,900;1,700&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,600;0,700;0,800;0,900;1,700&family=Playfair+Display:ital,wght@0,700;0,800;1,700&display=swap" rel="stylesheet" />
   <style>
     :root {
       --beige:   #f4ede0;
@@ -21,76 +21,51 @@
       --brown:   #3d2b1f;
       --sand:    #e8d9c4;
     }
-
     *, *::before, *::after { box-sizing: border-box; }
     * { font-family: 'Nunito', sans-serif; -webkit-tap-highlight-color: transparent; }
-    h1, h2 { font-family: 'Playfair Display', serif; }
+    h1, h2, h3 { font-family: 'Playfair Display', serif; }
     body { background: var(--beige); color: var(--brown); overflow-x: hidden; margin: 0; }
     img { max-width: 100%; display: block; }
+    html { scroll-padding-top: 72px; }
 
-    /* ── Scroll offset for anchor links (sticky bar) */
-    html { scroll-padding-top: 80px; }
-
-    /* ── Buttons — mobile-first full width, desktop auto */
-    .btn-terra {
+    /* ── BUTTONS ─────────────────────────────── */
+    .btn {
       display: block; width: 100%; text-align: center;
       background: var(--terra); color: #fff; border-radius: 50px;
-      font-weight: 900; letter-spacing: .02em; text-decoration: none;
+      font-family: 'Nunito', sans-serif;
+      font-weight: 900; letter-spacing: .03em; text-decoration: none;
       padding: 18px 28px; font-size: 17px; line-height: 1.2;
-      min-height: 56px;
-      transition: transform .2s, background .2s, box-shadow .2s;
-      border: none; cursor: pointer;
+      min-height: 56px; border: none; cursor: pointer;
+      transition: background .2s, transform .15s, box-shadow .2s;
     }
-    .btn-terra:hover  { background: var(--terra-d); transform: translateY(-2px); }
-    .btn-terra:active { transform: scale(.97); }
-    @media (min-width: 640px) {
-      .btn-terra.btn-inline { display: inline-block; width: auto; }
-    }
-
+    .btn:hover  { background: var(--terra-d); transform: translateY(-2px); box-shadow: 0 10px 28px rgba(200,98,74,.35); }
+    .btn:active { transform: scale(.97); }
+    .btn-sm { padding: 14px 28px; font-size: 15px; min-height: 50px; }
     @keyframes pulse-terra {
-      0%,100% { box-shadow: 0 0 0 0 rgba(200,98,74,.45); }
-      50%      { box-shadow: 0 0 0 16px rgba(200,98,74,0); }
+      0%,100% { box-shadow: 0 0 0 0 rgba(200,98,74,.5); }
+      50%      { box-shadow: 0 0 0 18px rgba(200,98,74,0); }
     }
-    .btn-pulse { animation: pulse-terra 2.2s infinite; }
+    .btn-pulse { animation: pulse-terra 2.4s infinite; }
 
-    /* ── Sticky bar */
+    /* ── STICKY BAR ──────────────────────────── */
     #sticky-bar {
       position: fixed; bottom: 0; left: 0; right: 0; z-index: 999;
-      transform: translateY(102%); transition: transform .35s cubic-bezier(.4,0,.2,1);
+      transform: translateY(102%);
+      transition: transform .35s cubic-bezier(.4,0,.2,1);
       padding-bottom: env(safe-area-inset-bottom);
     }
     #sticky-bar.visible { transform: translateY(0); }
 
-    /* ── Device mockups */
-    .mockup-phone {
-      background: #1c1c1e; border-radius: 36px; padding: 12px 8px;
-      box-shadow: 0 24px 60px rgba(0,0,0,.4);
-      position: relative; width: 200px; margin: 0 auto;
-    }
-    .mockup-phone::before {
-      content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
-      width: 60px; height: 6px; background: #333; border-radius: 0 0 6px 6px;
-    }
-    .mockup-phone-screen { background: #fff; border-radius: 26px; overflow: hidden; }
-
-    .mockup-laptop { background: #2a2a2a; border-radius: 14px 14px 0 0; padding: 10px 10px 0; box-shadow: 0 30px 60px rgba(0,0,0,.3); }
-    .mockup-laptop::after { content: ''; display: block; background: #3d3d3d; border-radius: 0 0 8px 8px; height: 18px; margin: 0 -10px; }
-    .mockup-cam { width: 8px; height: 8px; background: #555; border-radius: 50%; margin: 0 auto 6px; }
-    .mockup-screen { background: #fff; border-radius: 6px; overflow: hidden; }
-    .mockup-tablet { background: #2a2a2a; border-radius: 18px; padding: 12px 8px; box-shadow: 0 20px 50px rgba(0,0,0,.3); }
-    .mockup-tablet::before { content: ''; display: block; width: 28px; height: 4px; background: #555; border-radius: 4px; margin: 0 auto 8px; }
-    .mockup-tablet-screen { background: #fff; border-radius: 8px; overflow: hidden; position: relative; }
-
-    /* ── WhatsApp bubbles */
-    .wa-wrap { background: #ddd9d0; border-radius: 16px; padding: 14px; display: flex; flex-direction: column; gap: 12px; }
-    .wa-out { background: #d7f2bb; border-radius: 12px 0 12px 12px; padding: 10px 14px; max-width: 84%; margin-left: auto; box-shadow: 0 1px 2px rgba(0,0,0,.15); font-size: 14px; line-height: 1.55; color: #1a1a1a; }
-    .wa-in  { background: #fff; border-radius: 0 12px 12px 12px; padding: 10px 14px; max-width: 90%; box-shadow: 0 1px 2px rgba(0,0,0,.15); font-size: 14px; line-height: 1.55; color: #1a1a1a; }
+    /* ── WHATSAPP ─────────────────────────────── */
+    .wa-wrap { background: #d4d0c8; border-radius: 16px; padding: 14px; display: flex; flex-direction: column; gap: 12px; }
+    .wa-out { background: #d7f2bb; border-radius: 12px 0 12px 12px; padding: 11px 14px; max-width: 84%; margin-left: auto; box-shadow: 0 1px 3px rgba(0,0,0,.15); font-size: 14px; line-height: 1.6; color: #1a1a1a; }
+    .wa-in  { background: #fff; border-radius: 0 12px 12px 12px; padding: 11px 14px; max-width: 90%; box-shadow: 0 1px 3px rgba(0,0,0,.15); font-size: 14px; line-height: 1.6; color: #1a1a1a; }
     .wa-time { font-size: 11px; color: #aaa; text-align: right; margin-top: 4px; }
 
-    /* ── Timer segments */
+    /* ── COUNTDOWN ────────────────────────────── */
     .timer-seg { background: var(--brown); color: #f4ede0; border-radius: 10px; min-width: 56px; padding: 8px 6px; text-align: center; }
 
-    /* ── Shimmer price */
+    /* ── SHIMMER ──────────────────────────────── */
     @keyframes shimmer { 0%{background-position:-200% 0} 100%{background-position:200% 0} }
     .shimmer-price {
       background: linear-gradient(90deg, var(--terra) 25%, #e8a87c 50%, var(--terra) 75%);
@@ -98,11 +73,11 @@
       animation: shimmer 3s linear infinite;
     }
 
-    /* ── Float */
+    /* ── FLOAT ────────────────────────────────── */
     @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-7px)} }
     .float { animation: float 3.5s ease-in-out infinite; }
 
-    /* ── Checkmark list items */
+    /* ── CHECK LIST ───────────────────────────── */
     .chk { display: flex; align-items: flex-start; gap: 10px; font-weight: 600; color: #44403c; }
     .chk::before {
       content: '✓'; flex-shrink: 0;
@@ -110,92 +85,106 @@
       font-weight: 900; font-size: 12px; display: inline-flex; align-items: center; justify-content: center;
     }
 
-    /* ── FAQ */
+    /* ── FAQ ──────────────────────────────────── */
     .faq-body { max-height: 0; overflow: hidden; transition: max-height .45s ease; }
     .faq-body.open { max-height: 600px; }
-    .faq-btn { background: transparent; border: none; cursor: pointer; width: 100%; text-align: left;
+    .faq-btn {
+      background: transparent; border: none; cursor: pointer; width: 100%; text-align: left;
       display: flex; align-items: center; justify-content: space-between; gap: 12px;
-      padding: 18px 20px; min-height: 64px; /* big touch target */ }
+      padding: 18px 20px; min-height: 64px;
+    }
     .faq-icon { font-size: 22px; font-weight: 900; color: var(--terra); flex-shrink: 0; transition: transform .3s; line-height: 1; }
-    .faq-answer { padding: 0 20px 18px; color: #78716c; font-size: 15px; line-height: 1.75;
-      border-top: 1px solid #f3f0eb; padding-top: 14px; }
+    .faq-answer { padding: 0 20px 18px; color: #78716c; font-size: 15px; line-height: 1.75; border-top: 1px solid #f3f0eb; padding-top: 14px; }
 
-    /* ── Comparison table — MOBILE: stacked cards */
-    .cmp-table { border-radius: 16px; overflow: hidden; }
-    .cmp-head { display: none; } /* hidden on mobile */
+    /* ── COMPARISON TABLE (mobile cards / desktop grid) ── */
+    .cmp-head { display: none; }
     .cmp-row { margin-bottom: 10px; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,.07); }
-    .cmp-label { background: #f5f0e8; padding: 10px 14px; font-weight: 900; font-size: 12px; color: #92827a; text-transform: uppercase; letter-spacing: .06em; }
+    .cmp-label { background: #f5f0e8; padding: 10px 14px; font-weight: 900; font-size: 11px; color: #92827a; text-transform: uppercase; letter-spacing: .06em; }
     .cmp-cells { display: grid; grid-template-columns: 1fr 1fr; }
-    .cmp-yes { background: #f0faf1; padding: 12px 12px; font-size: 13px; font-weight: 700; color: #3d6b43; display: flex; align-items: flex-start; gap: 6px; }
-    .cmp-no  { background: #fff5f5; padding: 12px 12px; font-size: 13px; color: #c0392b; display: flex; align-items: flex-start; gap: 6px; border-left: 1px solid #fde8e4; }
-    .cmp-yes-icon { flex-shrink: 0; color: #16a34a; font-weight: 900; margin-top: 1px; }
-    .cmp-no-icon  { flex-shrink: 0; font-weight: 900; margin-top: 1px; }
+    .cmp-yes { background: #f0faf1; padding: 12px; font-size: 13px; font-weight: 700; color: #3d6b43; display: flex; align-items: flex-start; gap: 6px; }
+    .cmp-no  { background: #fff5f5; padding: 12px; font-size: 13px; color: #c0392b; display: flex; align-items: flex-start; gap: 6px; border-left: 1px solid #fde8e4; }
+    .cmp-yes-icon, .cmp-no-icon { flex-shrink: 0; font-weight: 900; margin-top: 1px; }
 
-    /* ── DESKTOP: 3-col table */
     @media (min-width: 640px) {
       .cmp-head { display: grid; grid-template-columns: 1.2fr 1fr 1fr; }
-      .cmp-row { border-radius: 0; margin-bottom: 0; box-shadow: none; }
+      .cmp-row { border-radius: 0; margin-bottom: 0; box-shadow: none; display: grid; grid-template-columns: 1.2fr 1fr 1fr; }
       .cmp-row:nth-child(odd)  { background: #fff; }
       .cmp-row:nth-child(even) { background: #faf9f6; }
-      .cmp-label { background: transparent; padding: 14px 16px; font-size: 13px; font-weight: 700; color: #78716c; text-transform: none; letter-spacing: 0; border-bottom: 1px solid #f3f0eb; }
-      .cmp-cells { grid-template-columns: 1fr 1fr; border-bottom: 1px solid #f3f0eb; }
+      .cmp-label { background: transparent; padding: 14px 16px; font-size: 13px; font-weight: 700; color: #78716c; text-transform: none; letter-spacing: 0; border-bottom: 1px solid #f3f0eb; grid-column: 1; }
+      .cmp-cells { grid-column: 2/-1; border-bottom: 1px solid #f3f0eb; }
       .cmp-yes { border-left: 1px solid #f3f0eb; background: transparent; }
       .cmp-no  { background: transparent; border-left: 1px solid #f3f0eb; }
-      .cmp-row { display: grid; grid-template-columns: 1.2fr 1fr 1fr; }
-      .cmp-label { grid-column: 1; }
-      .cmp-cells { grid-column: 2 / -1; }
+      .cmp-mobile-legend { display: none; }
     }
 
-    /* ── Progress */
-    .progress-fill { height: 100%; border-radius: 50px; background: linear-gradient(90deg, var(--terra-l), var(--terra)); width: 87%; }
+    /* ── MOCKUP ───────────────────────────────── */
+    .mockup-phone { background: #1c1c1e; border-radius: 36px; padding: 12px 8px; box-shadow: 0 24px 60px rgba(0,0,0,.4); position: relative; width: 210px; margin: 0 auto; }
+    .mockup-phone::before { content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 60px; height: 6px; background: #333; border-radius: 0 0 6px 6px; }
+    .mockup-phone-screen { background: #fff; border-radius: 26px; overflow: hidden; }
 
-    /* ── Guarantee badge */
-    .guarantee-badge {
-      width: 110px; height: 110px; border-radius: 50%;
-      border: 5px solid var(--terra); background: var(--cream);
-      display: flex; flex-direction: column; align-items: center; justify-content: center;
-      box-shadow: 0 8px 24px rgba(200,98,74,.2); flex-shrink: 0;
-    }
+    /* ── UTILITY ──────────────────────────────── */
+    .label { font-size: 11px; font-weight: 900; letter-spacing: .1em; text-transform: uppercase; color: var(--terra); text-align: center; margin-bottom: 10px; }
+    .h2 { font-size: clamp(26px,6vw,40px); text-align: center; color: var(--brown); line-height: 1.2; margin: 0 0 10px; }
+    .sub { text-align: center; color: #78716c; font-size: 15px; line-height: 1.7; max-width: 480px; margin: 0 auto 28px; }
+    .sec { padding: 56px 20px; }
+    .inner { max-width: 640px; margin: 0 auto; }
+    .inner-sm { max-width: 480px; margin: 0 auto; }
+    .progress-fill { height: 100%; border-radius: 50px; background: linear-gradient(90deg,var(--terra-l),var(--terra)); width: 87%; }
+    .guarantee-badge { width: 110px; height: 110px; border-radius: 50%; border: 5px solid var(--terra); background: var(--cream); display: flex; flex-direction: column; align-items: center; justify-content: center; box-shadow: 0 8px 24px rgba(200,98,74,.2); flex-shrink: 0; }
 
-    /* ── Utility */
-    .section-label { font-size: 11px; font-weight: 900; letter-spacing: .1em; text-transform: uppercase; color: var(--terra); text-align: center; margin-bottom: 10px; }
-    .section-h2 { font-size: clamp(26px, 6vw, 40px); text-align: center; color: var(--brown); line-height: 1.2; margin-bottom: 10px; }
-    .section-sub { text-align: center; color: #78716c; font-size: 15px; line-height: 1.65; max-width: 480px; margin: 0 auto 32px; }
+    /* Urgency inline strip */
+    .urgency-strip { background: #fff3f0; border-radius: 12px; padding: 12px 16px; border-left: 4px solid var(--terra); font-size: 13px; font-weight: 700; color: #7a3020; line-height: 1.5; }
+    .urgency-strip strong { color: var(--terra); }
   </style>
 </head>
 <body>
 
-<!-- ══ ANNOUNCEMENT BAR ═══════════════════════════════════════ -->
+<!-- ══ ANNOUNCEMENT BAR ══════════════════════════════════════════
+     DESIGN: High contrast, red urgency, one clear number
+     COPY: Specific scarcity + consequence
+──────────────────────────────────────────────────────────────── -->
 <div style="background:var(--terra);color:#fff;text-align:center;padding:10px 16px;font-size:13px;font-weight:700;line-height:1.4;">
-  🔥 <strong>Limited Launch Price</strong> — Only <span id="spots-top">13</span> spots left at $17
+  ⏳ Only <span id="spots-top" style="background:rgba(255,255,255,.2);padding:1px 7px;border-radius:20px;">13 spots</span> left at $17 — price doubles when the timer hits zero
 </div>
 
-<!-- ══ HERO ══════════════════════════════════════════════════════ -->
-<section style="background:var(--cream);padding:32px 20px 0;overflow:hidden;">
-  <div style="max-width:960px;margin:0 auto;">
 
-    <!-- Trust badge -->
-    <div style="text-align:center;margin-bottom:20px;">
-      <span style="background:var(--sand);color:var(--terra);font-size:11px;font-weight:900;letter-spacing:.08em;text-transform:uppercase;padding:7px 18px;border-radius:50px;display:inline-block;">
-        🍊 Trusted by 9,000+ Moms · 74 Countries
+<!-- ══ HERO ══════════════════════════════════════════════════════
+     DESIGN: Identity statement first → big emotional headline →
+             clear subhead → timer → CTA → social proof
+     COPY PRINCIPLE: Mirror → Fear → Promise → Relief
+──────────────────────────────────────────────────────────────── -->
+<section style="background:var(--cream);padding:36px 20px 0;overflow:hidden;">
+  <div style="max-width:680px;margin:0 auto;">
+
+    <!-- Identity hook — before headline -->
+    <div style="text-align:center;margin-bottom:18px;">
+      <span style="background:#fde8e4;color:#9b3a28;font-size:12px;font-weight:900;letter-spacing:.08em;text-transform:uppercase;padding:7px 18px;border-radius:50px;display:inline-block;">
+        For moms with babies aged 6–24 months →
       </span>
     </div>
 
-    <!-- Headline — mobile centered -->
-    <h1 style="font-size:clamp(32px,8vw,54px);line-height:1.1;text-align:center;color:var(--brown);margin:0 0 10px;">
-      Stop Stressing Over<br/>
-      <span style="color:var(--terra);">What to Feed<br/>Your Baby.</span>
+    <!-- THE HEADLINE — scroll-stopping, fear + consequence -->
+    <h1 style="font-size:clamp(30px,7.5vw,52px);line-height:1.1;text-align:center;color:var(--brown);margin:0 0 16px;">
+      Most Moms Start Solids<br/>
+      Without a Plan.<br/>
+      <span style="color:var(--terra);font-style:italic;">Their Babies Pay For It for Years.</span>
     </h1>
-    <p style="text-align:center;font-size:clamp(17px,4vw,22px);font-weight:700;color:var(--sage-d);margin:0 0 14px;">
-      Raise a <em>"Little Foodie"</em> Who Eats Everything!
+
+    <!-- Subheadline — relief promise, specific -->
+    <p style="text-align:center;font-size:clamp(16px,4vw,20px);font-weight:700;color:#5a7d5e;line-height:1.5;margin:0 0 20px;max-width:520px;margin-left:auto;margin-right:auto;">
+      The nutritionist-designed system that takes you from terrified and guessing — to calm, confident, and in complete control of every single bite.
     </p>
-    <p style="text-align:center;color:#78716c;font-size:15px;line-height:1.65;max-width:480px;margin:0 auto 24px;">
-      18 months of complete, <strong>nutritionist-designed meal plans</strong>, weekly shopping lists and prep guides — from first bites to the second birthday.
-    </p>
+
+    <!-- Social proof numbers — above the fold -->
+    <div style="display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-bottom:24px;">
+      <span style="background:var(--sand);color:var(--brown);font-size:12px;font-weight:800;padding:6px 14px;border-radius:50px;">⭐⭐⭐⭐⭐ 4.9/5</span>
+      <span style="background:var(--sand);color:var(--brown);font-size:12px;font-weight:800;padding:6px 14px;border-radius:50px;">👶 9,000+ Moms</span>
+      <span style="background:var(--sand);color:var(--brown);font-size:12px;font-weight:800;padding:6px 14px;border-radius:50px;">🌍 74 Countries</span>
+    </div>
 
     <!-- Countdown -->
     <div style="text-align:center;margin-bottom:24px;">
-      <p style="font-size:11px;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:var(--terra);margin-bottom:10px;">⏰ Offer expires in:</p>
+      <p style="font-size:11px;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:var(--terra);margin:0 0 10px;">⏰ This price disappears in:</p>
       <div style="display:flex;gap:8px;align-items:center;justify-content:center;">
         <div class="timer-seg"><div style="font-size:26px;font-weight:900;line-height:1;" id="th">00</div><div style="font-size:10px;opacity:.6;margin-top:3px;">HRS</div></div>
         <span style="font-size:26px;font-weight:900;color:var(--terra);">:</span>
@@ -205,132 +194,160 @@
       </div>
     </div>
 
-    <!-- PRIMARY CTA — full width on mobile -->
-    <div style="max-width:420px;margin:0 auto 12px;">
-      <a href="#order" id="hero-cta" class="btn-terra btn-pulse">✅ YES! I WANT MY MEAL PLAN</a>
+    <!-- PRIMARY CTA -->
+    <div style="max-width:420px;margin:0 auto 10px;">
+      <a href="#order" id="hero-cta" class="btn btn-pulse">Yes — Give Me the Plan Right Now →</a>
     </div>
-    <p style="text-align:center;font-size:12px;color:#a8a29e;margin-bottom:20px;">🔒 Secure Checkout · Instant Access · 30-Day Guarantee</p>
+    <p style="text-align:center;font-size:12px;color:#a8a29e;margin-bottom:28px;">🔒 Secure checkout · Instant digital access · 30-day money-back guarantee</p>
 
-    <!-- Stars row -->
-    <div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:center;font-size:13px;font-weight:700;color:#78716c;margin-bottom:28px;">
-      <span>⭐⭐⭐⭐⭐ 4.9/5</span>
-      <span>👶 9,000+ Families</span>
-      <span>🌍 74 Countries</span>
-    </div>
-
-    <!-- HERO MOCKUP — phone on mobile, laptop on desktop -->
-    <div style="text-align:center;margin-bottom:0;position:relative;">
-      <!-- Mobile: phone mockup -->
-      <div style="display:block;" class="md-hide-on-desktop">
-        <div class="mockup-phone">
-          <div class="mockup-phone-screen" style="height:280px;position:relative;overflow:hidden;">
-            <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=400&q=80"
-              alt="Colorful nutritious baby meal plan" style="width:100%;height:100%;object-fit:cover;" loading="eager" />
-            <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(61,43,31,.8) 0%,transparent 50%);">
-              <div style="position:absolute;bottom:0;left:0;right:0;padding:14px;color:#fff;text-align:left;">
-                <p style="font-weight:900;font-size:13px;margin:0;">The Baby Foodie</p>
-                <p style="font-size:10px;opacity:.8;margin:2px 0 0;">6–24 Months · Week 1</p>
-              </div>
+    <!-- Hero visual — phone mockup showing the actual product -->
+    <div style="position:relative;margin-bottom:0;">
+      <div class="mockup-phone">
+        <div class="mockup-phone-screen" style="position:relative;overflow:hidden;">
+          <div style="background:#f9f5ef;">
+            <div style="background:var(--terra);color:#fff;padding:10px 12px;">
+              <p style="font-weight:900;font-size:11px;margin:0;">🍼 The Baby Foodie · Week 8 (10–11m)</p>
             </div>
-            <!-- Price badge -->
-            <div style="position:absolute;top:12px;right:12px;background:#fff;border-radius:12px;padding:6px 10px;text-align:center;box-shadow:0 4px 12px rgba(0,0,0,.2);border:2px solid var(--terra);">
-              <p style="font-size:10px;font-weight:900;color:var(--terra);margin:0;">80% OFF</p>
-              <p style="font-size:18px;font-weight:900;color:var(--brown);margin:0;line-height:1.1;">$17</p>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px;padding:6px;">
+              <div style="background:#fff;border-radius:6px;overflow:hidden;"><img src="https://images.unsplash.com/photo-1540420773420-3366772f4999?w=150&q=70" alt="Avocado meal" loading="eager" style="width:100%;height:50px;object-fit:cover;" /><div style="padding:4px 5px;"><p style="font-size:8px;font-weight:800;color:var(--brown);margin:0;">Mon · Lunch</p><p style="font-size:7px;color:#888;margin:0;">Avocado & sweet potato</p></div></div>
+              <div style="background:#fff;border-radius:6px;overflow:hidden;"><img src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=150&q=70" alt="Carrot bowl" loading="eager" style="width:100%;height:50px;object-fit:cover;" /><div style="padding:4px 5px;"><p style="font-size:8px;font-weight:800;color:var(--brown);margin:0;">Tue · Lunch</p><p style="font-size:7px;color:#888;margin:0;">Carrot & lentil purée</p></div></div>
+              <div style="background:#fff;border-radius:6px;overflow:hidden;"><img src="https://images.unsplash.com/photo-1484723091739-30a097e8f929?w=150&q=70" alt="Oat porridge" loading="eager" style="width:100%;height:50px;object-fit:cover;" /><div style="padding:4px 5px;"><p style="font-size:8px;font-weight:800;color:var(--brown);margin:0;">Wed · Breakfast</p><p style="font-size:7px;color:#888;margin:0;">Peach & oat porridge</p></div></div>
+              <div style="background:var(--terra);border-radius:6px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:6px;gap:2px;"><span style="font-size:16px;">📋</span><span style="color:#fff;font-size:7px;font-weight:900;text-align:center;">Shopping List<br/>Included</span></div>
             </div>
+            <div style="padding:6px 6px 8px;"><div style="background:#fff;border-radius:6px;padding:7px 8px;font-size:8px;font-weight:700;color:#555;"><span style="color:var(--sage-d);font-weight:900;">✓ Thu:</span> Broccoli fingers &nbsp; <span style="color:var(--sage-d);font-weight:900;">✓ Fri:</span> Salmon blend</div></div>
           </div>
         </div>
       </div>
-
-      <!-- Desktop: laptop mockup -->
-      <div style="display:none;max-width:540px;margin:0 auto;" class="show-on-desktop">
-        <div style="position:relative;">
-          <div class="mockup-laptop">
-            <div class="mockup-cam"></div>
-            <div class="mockup-screen" style="height:260px;position:relative;overflow:hidden;">
-              <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=800&q=80"
-                alt="Colorful meal plan" style="width:100%;height:100%;object-fit:cover;" loading="eager" />
-              <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(61,43,31,.75) 0%,transparent 50%);">
-                <div style="position:absolute;bottom:0;left:0;right:0;padding:16px;color:#fff;">
-                  <p style="font-weight:900;font-size:14px;margin:0;">The Baby Foodie</p>
-                  <p style="font-size:11px;opacity:.8;margin:2px 0 0;">6–24 Months Meal Plans · Week 1</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div style="position:absolute;top:-18px;left:-18px;" class="float">
-            <div style="background:#fff;border-radius:16px;box-shadow:0 8px 24px rgba(0,0,0,.15);padding:10px 16px;text-align:center;border:2px solid var(--terra);">
-              <p style="font-size:11px;font-weight:900;color:var(--terra);margin:0;">80% OFF</p>
-              <p style="font-size:22px;font-weight:900;color:var(--brown);margin:0;line-height:1.1;">$17</p>
-            </div>
-          </div>
+      <!-- Floating badges -->
+      <div class="float" style="position:absolute;top:10px;right:calc(50% - 140px);animation-delay:.3s;">
+        <div style="background:#fff;border-radius:14px;box-shadow:0 8px 24px rgba(0,0,0,.15);padding:8px 14px;text-align:center;border:2px solid var(--terra);">
+          <p style="font-size:10px;font-weight:900;color:var(--terra);margin:0;">80% OFF</p>
+          <p style="font-size:20px;font-weight:900;color:var(--brown);margin:0;line-height:1.1;">$17</p>
         </div>
       </div>
     </div>
 
-    <!-- Food strip — 2 cols mobile, 4 cols desktop -->
-    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-top:20px;" class="food-strip">
-      <div style="height:120px;border-radius:16px 16px 0 0;overflow:hidden;box-shadow:0 4px 16px rgba(0,0,0,.1);">
+    <!-- Food strip — 2 cols mobile / 4 desktop -->
+    <div id="food-strip" style="display:grid;grid-template-columns:repeat(2,1fr);gap:6px;margin-top:16px;">
+      <div style="height:110px;border-radius:14px 14px 0 0;overflow:hidden;position:relative;">
         <img src="https://images.unsplash.com/photo-1540420773420-3366772f4999?w=400&q=80" alt="Avocado" loading="eager" style="width:100%;height:100%;object-fit:cover;" />
+        <div style="position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(61,43,31,.6));padding:6px 8px;"><span style="color:#fff;font-size:10px;font-weight:800;">Safe from 6m ✓</span></div>
       </div>
-      <div style="height:120px;border-radius:16px 16px 0 0;overflow:hidden;box-shadow:0 4px 16px rgba(0,0,0,.1);">
+      <div style="height:110px;border-radius:14px 14px 0 0;overflow:hidden;position:relative;">
         <img src="https://images.unsplash.com/photo-1490818387583-1baba5e638af?w=400&q=80" alt="Colorful fruits" loading="eager" style="width:100%;height:100%;object-fit:cover;" />
+        <div style="position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(61,43,31,.6));padding:6px 8px;"><span style="color:#fff;font-size:10px;font-weight:800;">Cuts shown inside ✓</span></div>
       </div>
-      <div style="height:120px;border-radius:16px 16px 0 0;overflow:hidden;box-shadow:0 4px 16px rgba(0,0,0,.1);">
+      <div style="height:110px;border-radius:14px 14px 0 0;overflow:hidden;position:relative;">
         <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=400&q=80" alt="Rainbow veggie bowl" loading="lazy" style="width:100%;height:100%;object-fit:cover;" />
+        <div style="position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(61,43,31,.6));padding:6px 8px;"><span style="color:#fff;font-size:10px;font-weight:800;">Stage 2 (9–12m) ✓</span></div>
       </div>
-      <div style="height:120px;border-radius:16px 16px 0 0;overflow:hidden;box-shadow:0 4px 16px rgba(0,0,0,.1);">
+      <div style="height:110px;border-radius:14px 14px 0 0;overflow:hidden;position:relative;">
         <img src="https://images.unsplash.com/photo-1498837167922-ddd27525d352?w=400&q=80" alt="Healthy food spread" loading="lazy" style="width:100%;height:100%;object-fit:cover;" />
+        <div style="position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(61,43,31,.6));padding:6px 8px;"><span style="color:#fff;font-size:10px;font-weight:800;">Stage 3 (12–24m) ✓</span></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ══ PAIN POINT ════════════════════════════════════════════════ -->
+
+<!-- ══ PAIN SECTION ════════════════════════════════════════════════
+     DESIGN: Dark overlay image + emotional scenario copy + 3 pain cards
+     COPY: Specific real-life moments. Internal monologue. Not preachy.
+──────────────────────────────────────────────────────────────── -->
 <section style="background:var(--beige);padding:56px 20px;">
-  <div style="max-width:680px;margin:0 auto;">
-    <p class="section-label">You're not alone in this</p>
-    <h2 class="section-h2">Does This Sound Familiar?</h2>
+  <div class="inner">
+    <p class="label">Sound familiar?</p>
+    <h2 class="h2" style="margin-bottom:6px;">You're Not Struggling<br/>Because You're a Bad Mom.</h2>
+    <p class="sub">You're struggling because nobody gave you a plan.</p>
 
-    <!-- Photo + text stacked on mobile -->
-    <div style="border-radius:20px;overflow:hidden;box-shadow:0 12px 40px rgba(0,0,0,.15);margin-bottom:20px;position:relative;min-height:220px;">
-      <img src="https://images.unsplash.com/photo-1476703993599-0035a21b17a9?w=700&q=80"
-        alt="Exhausted mom at mealtime" loading="lazy" style="width:100%;height:240px;object-fit:cover;display:block;" />
-      <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(61,43,31,.88) 0%,rgba(61,43,31,.05) 100%);display:flex;align-items:flex-end;padding:20px;">
-        <div style="color:#fff;">
-          <p style="font-weight:900;font-size:18px;margin:0 0 4px;">The Overwhelmed Mom</p>
-          <p style="font-size:13px;opacity:.85;margin:0;">Every mealtime feels like a test you didn't study for.</p>
-        </div>
-      </div>
-    </div>
-
-    <div style="display:flex;flex-direction:column;gap:12px;margin-bottom:24px;">
-      <div style="background:#fff;border-radius:16px;padding:16px;display:flex;align-items:flex-start;gap:14px;box-shadow:0 2px 8px rgba(0,0,0,.06);border-left:4px solid var(--terra);">
-        <span style="font-size:26px;flex-shrink:0;line-height:1;">😰</span>
-        <div><p style="font-weight:900;color:var(--brown);margin:0 0 4px;font-size:15px;">Fear of Choking at Every Bite</p><p style="color:#78716c;font-size:14px;margin:0;line-height:1.55;">You watch in terror instead of enjoying the moment. Mealtime is dread, not connection.</p></div>
-      </div>
-      <div style="background:#fff;border-radius:16px;padding:16px;display:flex;align-items:flex-start;gap:14px;box-shadow:0 2px 8px rgba(0,0,0,.06);border-left:4px solid #e8a040;">
-        <span style="font-size:26px;flex-shrink:0;line-height:1;">⏰</span>
-        <div><p style="font-weight:900;color:var(--brown);margin:0 0 4px;font-size:15px;">Hours of Research, Zero Confidence</p><p style="color:#78716c;font-size:14px;margin:0;line-height:1.55;">You've bookmarked 40 recipes, watched 20 videos, and still end up with the same puréed carrots.</p></div>
-      </div>
-      <div style="background:#fff;border-radius:16px;padding:16px;display:flex;align-items:flex-start;gap:14px;box-shadow:0 2px 8px rgba(0,0,0,.06);border-left:4px solid var(--sage);">
-        <span style="font-size:26px;flex-shrink:0;line-height:1;">🥴</span>
-        <div><p style="font-weight:900;color:var(--brown);margin:0 0 4px;font-size:15px;">Repetition Creates the Picky Eater</p><p style="color:#78716c;font-size:14px;margin:0;line-height:1.55;">Every day you serve the same 3 foods you narrow your baby's palate. Monotony builds picky eaters.</p></div>
-      </div>
-    </div>
-
-    <div style="background:var(--sand);border-radius:16px;padding:20px;border-left:4px solid var(--terra);">
-      <p style="font-size:15px;font-style:italic;font-weight:600;color:var(--brown);margin:0;line-height:1.7;">
-        "Between work, home, and the fear of making a mistake, you're exhausted. You spend hours searching for recipes only to serve the same three foods every day. <strong>Monotony leads to picky eaters — we are here to end that cycle."</strong>
+    <!-- Emotional scenario copy — the "mirror moment" -->
+    <div style="background:#fff;border-radius:20px;padding:24px;margin-bottom:20px;border-left:4px solid var(--terra);box-shadow:0 4px 20px rgba(0,0,0,.06);">
+      <p style="color:var(--brown);font-size:16px;line-height:1.8;margin:0 0 14px;">
+        It's 5:30pm. Your baby is fussing. You've served the same puréed carrot for four days in a row — not because it's the best choice for them. <strong>Because it's the only thing you know won't go wrong.</strong>
+      </p>
+      <p style="color:#78716c;font-size:15px;line-height:1.75;margin:0 0 14px;">
+        You've bookmarked 40 articles. You've watched the videos. You've asked the Facebook groups. And somehow, at the exact moment it matters, you still freeze.
+      </p>
+      <p style="color:#78716c;font-size:15px;line-height:1.75;margin:0;font-style:italic;">
+        <em>What if the texture is wrong? What if they gag — or worse? What if I'm missing something critical? Am I accidentally building a picky eater?</em>
       </p>
     </div>
+
+    <!-- 3 pain cards -->
+    <div style="display:flex;flex-direction:column;gap:12px;margin-bottom:24px;">
+      <div style="background:#fff;border-radius:16px;padding:16px 18px;display:flex;align-items:flex-start;gap:14px;box-shadow:0 2px 8px rgba(0,0,0,.06);border-left:4px solid var(--terra);">
+        <span style="font-size:26px;flex-shrink:0;line-height:1;">😰</span>
+        <div><p style="font-weight:900;color:var(--brown);margin:0 0 4px;font-size:15px;">Every bite feels like a risk</p><p style="color:#78716c;font-size:14px;margin:0;line-height:1.55;">You watch them chew with your heart in your throat. That's not how mealtime is supposed to feel.</p></div>
+      </div>
+      <div style="background:#fff;border-radius:16px;padding:16px 18px;display:flex;align-items:flex-start;gap:14px;box-shadow:0 2px 8px rgba(0,0,0,.06);border-left:4px solid #e8a040;">
+        <span style="font-size:26px;flex-shrink:0;line-height:1;">📱</span>
+        <div><p style="font-weight:900;color:var(--brown);margin:0 0 4px;font-size:15px;">You Google, then second-guess the Google</p><p style="color:#78716c;font-size:14px;margin:0;line-height:1.55;">Three articles, three different answers. The more you research, the less confident you feel.</p></div>
+      </div>
+      <div style="background:#fff;border-radius:16px;padding:16px 18px;display:flex;align-items:flex-start;gap:14px;box-shadow:0 2px 8px rgba(0,0,0,.06);border-left:4px solid var(--sage);">
+        <span style="font-size:26px;flex-shrink:0;line-height:1;">🔁</span>
+        <div><p style="font-weight:900;color:var(--brown);margin:0 0 4px;font-size:15px;">The same 3 foods, again and again</p><p style="color:#78716c;font-size:14px;margin:0;line-height:1.55;">You know repetition creates picky eaters. But trying something new feels like rolling the dice.</p></div>
+      </div>
+    </div>
+
+    <!-- The insight — the "no one told you" moment -->
+    <div style="background:var(--sand);border-radius:16px;padding:22px 20px;border-left:4px solid var(--terra);">
+      <p style="font-size:15px;font-weight:700;color:var(--brown);margin:0 0 10px;line-height:1.6;">
+        Here's what nobody tells you when you leave the hospital:
+      </p>
+      <p style="font-size:15px;color:#5c4a3e;line-height:1.75;margin:0;">
+        The 6–24 month window is when your baby's flavor preferences, textures tolerance, and eating habits are being <strong>permanently shaped</strong>. The foods they experience now — or don't experience — follow them for years. Every week without variety is a week of opportunity that doesn't come back.
+      </p>
+    </div>
+
+    <!-- Urgency thread #1 -->
+    <div class="urgency-strip" style="margin-top:16px;">
+      ⚠️ <strong>Every day without a plan</strong> isn't just stressful — it's a missed opportunity in a window that closes fast.
+    </div>
   </div>
 </section>
 
-<!-- ══ WHATSAPP TESTIMONIALS ══════════════════════════════════════ -->
+
+<!-- ══ IDENTIFICATION — "IS THIS YOU?" ════════════════════════════
+     DESIGN: Dark background, checklist. Breaks pattern, high contrast.
+     COPY: Internal dialogue. Specific. Makes reader nod yes.
+──────────────────────────────────────────────────────────────── -->
+<section style="background:var(--brown);padding:48px 20px;">
+  <div class="inner-sm" style="text-align:center;">
+    <p style="font-size:11px;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:var(--terra-l);margin:0 0 12px;">This was written for you if…</p>
+    <h2 style="font-family:'Playfair Display',serif;font-size:clamp(22px,5vw,32px);color:#fff;margin:0 0 24px;line-height:1.3;">You've Said Any of These<br/>to Yourself This Week</h2>
+
+    <div style="display:flex;flex-direction:column;gap:10px;text-align:left;margin-bottom:28px;">
+      <div style="background:rgba(255,255,255,.07);border-radius:12px;padding:14px 16px;border-left:3px solid var(--terra-l);font-size:14px;color:#e8d9c4;line-height:1.5;">
+        <em>"I'll just give them the same thing again tonight — at least I know it's safe."</em>
+      </div>
+      <div style="background:rgba(255,255,255,.07);border-radius:12px;padding:14px 16px;border-left:3px solid var(--terra-l);font-size:14px;color:#e8d9c4;line-height:1.5;">
+        <em>"What if they choke and I don't react fast enough?"</em>
+      </div>
+      <div style="background:rgba(255,255,255,.07);border-radius:12px;padding:14px 16px;border-left:3px solid var(--terra-l);font-size:14px;color:#e8d9c4;line-height:1.5;">
+        <em>"Am I making them a picky eater? Am I missing something important?"</em>
+      </div>
+      <div style="background:rgba(255,255,255,.07);border-radius:12px;padding:14px 16px;border-left:3px solid var(--terra-l);font-size:14px;color:#e8d9c4;line-height:1.5;">
+        <em>"I have no idea if they're getting the right nutrients at this stage."</em>
+      </div>
+    </div>
+
+    <p style="color:var(--terra-l);font-size:16px;font-weight:800;margin:0 0 24px;">That's exactly who The Baby Foodie was built for.</p>
+    <div style="max-width:360px;margin:0 auto;">
+      <a href="#order" class="btn btn-pulse">Yes, That's Me — Show Me the Plan</a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══ WHATSAPP SOCIAL PROOF (moved up — right after pain) ════════
+     DESIGN: Authentic chat UI. Screenshot-feel. Captions add context.
+     COPY: Real messages. No editing needed — they're already perfect.
+──────────────────────────────────────────────────────────────── -->
 <section style="background:var(--cream);padding:56px 20px;">
-  <div style="max-width:520px;margin:0 auto;">
-    <p class="section-label">Direct messages from real students</p>
-    <h2 class="section-h2" style="margin-bottom:28px;">Real Moms. Real Routines.<br/>Real Results.</h2>
+  <div style="max-width:500px;margin:0 auto;">
+    <p class="label">Before we show you the solution…</p>
+    <h2 class="h2" style="margin-bottom:6px;">Read What Happened When<br/>3 Moms Stopped Guessing</h2>
+    <p class="sub" style="margin-bottom:24px;">These are real messages. Unedited. Sent by moms who felt exactly what you're feeling right now.</p>
 
     <div class="wa-wrap">
       <div class="wa-out">How nice to know! I hope you like them and that they help you a lot! Let me know if you have any questions!! 😊</div>
@@ -339,234 +356,188 @@
         <p style="margin:6px 0 0;">Ok, I'll let you know if I need anything.</p>
         <div class="wa-time">✓✓</div>
       </div>
-      <div class="wa-in" style="margin-top:4px;">
+      <div class="wa-in">
         <p style="margin:0;">Hi, good afternoon!</p>
         <p style="margin:6px 0 0;">Gabi, I'm shocked by this menu! It's so much better and more complete than I expected… ohh, what care! You've taken care to include the cuts of all the fruits on the menu, the shopping list! Seriously, I'm in love.. how much it's made my life easier, you have no idea!</p>
         <p style="margin:6px 0 0;">Congratulations on this impeccable work, I've already recommended it to all my friends with babies 🥹😍</p>
         <div class="wa-time">18:11 ✓✓</div>
       </div>
-      <div class="wa-in" style="margin-top:4px;">
+      <div class="wa-in">
         <p style="margin:0;">Hello, Gabi. Good morning!</p>
-        <p style="margin:6px 0 0;">I managed to access the material and found it very practical. I had a lot of doubts about how to start, and especially how to organize myself to prepare meals with variety. Thank you!! 💙</p>
+        <p style="margin:6px 0 0;">I managed to access the material and found it very practical. I had a lot of doubts about how to start, and especially how to organize myself to prepare meals with variety. <strong>Thank you!! 💙</strong></p>
         <div class="wa-time">18:11 ✓✓</div>
       </div>
     </div>
 
-    <p style="text-align:center;font-size:13px;color:#a8a29e;font-weight:600;margin:16px 0 24px;">Real messages from moms who felt the same fear — and the same doubts you have right now.</p>
-    <a href="#order" class="btn-terra btn-pulse">I WANT TO FEEL THIS TOO →</a>
+    <p style="text-align:center;font-size:13px;color:#a8a29e;font-weight:600;margin:16px 0 24px;">Real messages from real moms — who were right where you are now.</p>
+    <a href="#order" class="btn btn-sm btn-pulse" style="max-width:360px;margin:0 auto;">I Want to Feel That Relief Too →</a>
   </div>
 </section>
 
-<!-- ══ PRODUCT SHOWCASE ══════════════════════════════════════════ -->
-<section style="background:var(--beige);padding:56px 20px;">
-  <div style="max-width:760px;margin:0 auto;text-align:center;">
-    <p class="section-label" style="color:var(--sage-d);">The solution you've been looking for</p>
-    <h2 class="section-h2">Everything you need to feed<br/>your baby, all in one place.</h2>
-    <p class="section-sub">No more guessing. No more daily stress. Just clear guidance from 6 months through the second birthday.</p>
 
-    <!-- Product mockup — phone on mobile, laptop on desktop -->
-    <div style="margin-bottom:40px;">
-      <!-- Mobile phone mockup with meal plan -->
-      <div class="mockup-phone" style="width:220px;margin:0 auto;">
+<!-- ══ SOLUTION ════════════════════════════════════════════════════
+     DESIGN: Clean reveal. Product name prominent. Mockup demonstrates value.
+     COPY: Not a recipe book. A system. 18 months = complete.
+──────────────────────────────────────────────────────────────── -->
+<section style="background:var(--beige);padding:56px 20px;">
+  <div style="max-width:680px;margin:0 auto;text-align:center;">
+    <p class="label" style="color:var(--sage-d);">Introducing</p>
+    <h2 style="font-family:'Playfair Display',serif;font-size:clamp(28px,7vw,46px);color:var(--brown);margin:0 0 8px;line-height:1.15;">The Baby Foodie</h2>
+    <p style="font-size:clamp(16px,3.5vw,20px);font-weight:800;color:var(--terra);margin:0 0 16px;">6 to 24 Months · Complete Eating System</p>
+    <p class="sub" style="font-size:16px;">
+      Not a recipe book. Not a list of ideas. A complete, stage-by-stage system that tells you <strong>exactly</strong> what to feed your baby — every single day, for 18 months. Someone else has already figured it out. You just follow the plan.
+    </p>
+
+    <!-- Authority line -->
+    <div style="display:inline-flex;align-items:center;gap:8px;background:var(--sand);border-radius:50px;padding:8px 18px;margin-bottom:32px;">
+      <span style="font-size:18px;">👩‍⚕️</span>
+      <span style="font-size:13px;font-weight:800;color:var(--brown);">Developed by a Specialist Pediatric Nutritionist</span>
+    </div>
+
+    <!-- Product mockup -->
+    <div style="margin-bottom:36px;">
+      <div class="mockup-phone" style="width:230px;">
         <div class="mockup-phone-screen" style="position:relative;overflow:hidden;">
-          <div style="background:#f9f5ef;">
-            <div style="background:var(--terra);color:#fff;padding:10px 12px;text-align:left;">
-              <p style="font-weight:900;font-size:11px;margin:0;">🍼 Baby Foodie — Week 8 (10–11m)</p>
-            </div>
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px;padding:6px;">
-              <div style="background:#fff;border-radius:6px;overflow:hidden;">
-                <img src="https://images.unsplash.com/photo-1540420773420-3366772f4999?w=150&q=70" alt="Mon" loading="lazy" style="width:100%;height:48px;object-fit:cover;" />
-                <div style="padding:4px 5px;"><p style="font-size:8px;font-weight:800;color:var(--brown);margin:0;">Mon · Lunch</p><p style="font-size:7px;color:#888;margin:1px 0 0;">Avocado & sweet potato</p></div>
-              </div>
-              <div style="background:#fff;border-radius:6px;overflow:hidden;">
-                <img src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=150&q=70" alt="Tue" loading="lazy" style="width:100%;height:48px;object-fit:cover;" />
-                <div style="padding:4px 5px;"><p style="font-size:8px;font-weight:800;color:var(--brown);margin:0;">Tue · Lunch</p><p style="font-size:7px;color:#888;margin:1px 0 0;">Carrot & lentil purée</p></div>
-              </div>
-              <div style="background:#fff;border-radius:6px;overflow:hidden;">
-                <img src="https://images.unsplash.com/photo-1484723091739-30a097e8f929?w=150&q=70" alt="Wed" loading="lazy" style="width:100%;height:48px;object-fit:cover;" />
-                <div style="padding:4px 5px;"><p style="font-size:8px;font-weight:800;color:var(--brown);margin:0;">Wed · Breakfast</p><p style="font-size:7px;color:#888;margin:1px 0 0;">Peach & oat porridge</p></div>
-              </div>
-              <div style="background:var(--terra);border-radius:6px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:2px;padding:6px;">
-                <span style="font-size:16px;">📋</span>
-                <span style="color:#fff;font-size:7px;font-weight:900;text-align:center;">Shopping List</span>
-              </div>
+          <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=400&q=80" alt="Meal plan food" loading="lazy" style="width:100%;height:220px;object-fit:cover;" />
+          <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(61,43,31,.82) 0%,transparent 50%);display:flex;align-items:flex-end;padding:14px;">
+            <div style="color:#fff;text-align:left;">
+              <p style="font-weight:900;font-size:14px;margin:0;">The Baby Foodie</p>
+              <p style="font-size:11px;opacity:.8;margin:2px 0 0;">6–24 Months · 78 weeks planned</p>
             </div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- 3 feature cards — stack on mobile, row on desktop -->
-    <div style="display:grid;grid-template-columns:1fr;gap:16px;">
-      <div style="background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 4px 16px rgba(0,0,0,.08);">
-        <div style="height:160px;overflow:hidden;">
-          <img src="https://images.unsplash.com/photo-1606923829579-0cb981a83e2e?w=500&q=80" alt="Colorful baby meal bowls" loading="lazy" style="width:100%;height:100%;object-fit:cover;" />
-        </div>
-        <div style="padding:16px;">
-          <p style="font-weight:900;font-size:16px;color:var(--brown);margin:0 0 6px;">🗓️ 18 Months of Meal Plans</p>
-          <p style="color:#78716c;font-size:14px;margin:0;line-height:1.55;">Complete, phased, age-appropriate for every single stage from 6 to 24 months.</p>
-        </div>
+    <!-- 3 feature cards -->
+    <div style="display:grid;grid-template-columns:1fr;gap:14px;">
+      <div style="background:#fff;border-radius:16px;padding:20px;display:flex;align-items:flex-start;gap:16px;box-shadow:0 4px 16px rgba(0,0,0,.07);text-align:left;">
+        <div style="width:48px;height:48px;border-radius:12px;background:#fef3e2;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;">🗓️</div>
+        <div><p style="font-weight:900;font-size:15px;color:var(--brown);margin:0 0 4px;">Every week for 18 months — planned for you</p><p style="color:#78716c;font-size:14px;margin:0;line-height:1.55;">Open the plan. See what to make. Done. No thinking. No searching. No panic.</p></div>
       </div>
-      <div style="background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 4px 16px rgba(0,0,0,.08);">
-        <div style="height:160px;overflow:hidden;">
-          <img src="https://images.unsplash.com/photo-1542838132-92c53300491e?w=500&q=80" alt="Grocery shopping" loading="lazy" style="width:100%;height:100%;object-fit:cover;" />
-        </div>
-        <div style="padding:16px;">
-          <p style="font-weight:900;font-size:16px;color:var(--brown);margin:0 0 6px;">🛒 Ready-to-Use Shopping Lists</p>
-          <p style="color:#78716c;font-size:14px;margin:0;line-height:1.55;">One per week, perfectly matched to the plan. Open on your phone and go.</p>
-        </div>
+      <div style="background:#fff;border-radius:16px;padding:20px;display:flex;align-items:flex-start;gap:16px;box-shadow:0 4px 16px rgba(0,0,0,.07);text-align:left;">
+        <div style="width:48px;height:48px;border-radius:12px;background:#e8f5e9;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;">🛒</div>
+        <div><p style="font-weight:900;font-size:15px;color:var(--brown);margin:0 0 4px;">One list. One trip. No standing in the aisle guessing</p><p style="color:#78716c;font-size:14px;margin:0;line-height:1.55;">Every week's shopping list is ready. Tap it on your phone and go.</p></div>
       </div>
-      <div style="background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 4px 16px rgba(0,0,0,.08);">
-        <div style="height:160px;overflow:hidden;">
-          <img src="https://images.unsplash.com/photo-1556909212-d5b604d0c90d?w=500&q=80" alt="Food prep" loading="lazy" style="width:100%;height:100%;object-fit:cover;" />
-        </div>
-        <div style="padding:16px;">
-          <p style="font-weight:900;font-size:16px;color:var(--brown);margin:0 0 6px;">👩‍🍳 Step-by-Step Prep Guides</p>
-          <p style="color:#78716c;font-size:14px;margin:0;line-height:1.55;">Textures, temperatures, portion sizes — all mapped out, nothing left to guess.</p>
-        </div>
+      <div style="background:#fff;border-radius:16px;padding:20px;display:flex;align-items:flex-start;gap:16px;box-shadow:0 4px 16px rgba(0,0,0,.07);text-align:left;">
+        <div style="width:48px;height:48px;border-radius:12px;background:#fce4ec;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;">✋</div>
+        <div><p style="font-weight:900;font-size:15px;color:var(--brown);margin:0 0 4px;">Know exactly what's safe — before every single bite</p><p style="color:#78716c;font-size:14px;margin:0;line-height:1.55;">Right texture. Right size. Right temperature. The guesswork is gone.</p></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ══ WHAT'S INCLUDED ════════════════════════════════════════════ -->
+
+<!-- ══ WHAT'S INCLUDED ════════════════════════════════════════════
+     COPY: Features → emotional outcomes. Benefits language only.
+──────────────────────────────────────────────────────────────── -->
 <section style="background:var(--cream);padding:56px 20px;">
-  <div style="max-width:640px;margin:0 auto;">
-    <p class="section-label">Complete Deliverable</p>
-    <h2 class="section-h2" style="margin-bottom:28px;">This is what you get<br/>as soon as you access it</h2>
+  <div class="inner">
+    <p class="label">Everything Inside</p>
+    <h2 class="h2" style="margin-bottom:6px;">What You Get<br/>The Moment You Access It</h2>
+    <p class="sub" style="margin-bottom:28px;">This isn't a "starter kit." It's the complete system — from first bites at 6 months through the full second year.</p>
 
     <!-- Core -->
-    <div style="background:#fff;border-radius:20px;padding:24px;margin-bottom:20px;border:1px solid #ede8e0;box-shadow:0 2px 12px rgba(0,0,0,.05);">
+    <div style="background:#fff;border-radius:20px;padding:24px;margin-bottom:18px;border:1px solid #ede8e0;box-shadow:0 2px 12px rgba(0,0,0,.05);">
       <div style="display:flex;align-items:center;gap:10px;margin-bottom:18px;">
         <span style="width:30px;height:30px;border-radius:50%;background:var(--sage);color:#fff;display:inline-flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;">✓</span>
-        <p style="font-weight:900;font-size:16px;color:var(--brown);margin:0;">Core System — The Meal Plan Engine</p>
+        <p style="font-weight:900;font-size:16px;color:var(--brown);margin:0;">The Core System</p>
       </div>
       <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:14px;">
-        <li class="chk">Complete Weekly Meal Plans for all <strong>18 months</strong> — purées at 6m to family table at 24m, textures that evolve as your baby grows.</li>
-        <li class="chk"><strong>Ready-to-Use Weekly Shopping Lists</strong> — perfectly matched, print or tap and go.</li>
-        <li class="chk">Step-by-Step <strong>Food Prep Guides</strong> — exact textures, safe temperatures, portions for every stage.</li>
-        <li class="chk">Safe Substitution List + <strong>Natural Baby Seasoning Guide</strong> — swap any ingredient confidently.</li>
+        <li class="chk" style="font-size:14px;"><span><strong>18 months of weekly meal plans</strong> — stage-appropriate from first purées at 6 months to real-food meals at 24. Textures evolve as your baby does.</span></li>
+        <li class="chk" style="font-size:14px;"><span><strong>Ready-to-use shopping lists</strong> — one per week, perfectly matched to the plan. Print it or open on your phone. Shopping takes minutes.</span></li>
+        <li class="chk" style="font-size:14px;"><span><strong>Step-by-step prep guides</strong> — exact textures, safe temperatures, correct portions. You'll never wonder "is this right?" again.</span></li>
+        <li class="chk" style="font-size:14px;"><span><strong>Safe substitution guide + baby-safe seasonings</strong> — swap any ingredient confidently. Start building flavor from day one.</span></li>
       </ul>
     </div>
 
-    <!-- Bonus -->
+    <!-- Bonuses -->
     <div style="background:#fff8f6;border-radius:20px;padding:24px;border:2px solid var(--terra);position:relative;margin-bottom:28px;">
-      <div style="position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:var(--terra);color:#fff;padding:5px 18px;border-radius:50px;font-size:12px;font-weight:900;white-space:nowrap;">
-        🎁 4 FREE BONUS GUIDES — Value $120
-      </div>
-      <div style="display:flex;flex-direction:column;gap:14px;margin-top:10px;">
-        <div style="background:#fff;border-radius:14px;padding:14px;display:flex;align-items:flex-start;gap:14px;box-shadow:0 2px 6px rgba(0,0,0,.05);">
-          <div style="width:50px;height:50px;border-radius:12px;background:#fef9c3;display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0;">🍓</div>
-          <div><p style="font-weight:900;font-size:14px;color:var(--brown);margin:0 0 4px;">Safe Fruit Cutting Techniques</p><p style="color:#78716c;font-size:13px;margin:0;line-height:1.5;">Step-by-step guide showing exactly how to cut every fruit — always safe, never a choking hazard.</p></div>
+      <div style="position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:var(--terra);color:#fff;padding:5px 18px;border-radius:50px;font-size:12px;font-weight:900;white-space:nowrap;">🎁 4 FREE BONUS GUIDES — Worth $120</div>
+      <div style="display:flex;flex-direction:column;gap:12px;margin-top:10px;">
+        <div style="background:#fff;border-radius:14px;padding:14px;display:flex;align-items:flex-start;gap:12px;box-shadow:0 2px 6px rgba(0,0,0,.05);">
+          <div style="width:46px;height:46px;border-radius:12px;background:#fef9c3;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;">🍓</div>
+          <div><p style="font-weight:900;font-size:14px;color:var(--brown);margin:0 0 3px;">Safe Fruit Cutting Techniques</p><p style="color:#78716c;font-size:13px;margin:0;line-height:1.5;">Every fruit. Every cut. Every size — illustrated so you never second-guess it again.</p></div>
         </div>
-        <div style="background:#fff;border-radius:14px;padding:14px;display:flex;align-items:flex-start;gap:14px;box-shadow:0 2px 6px rgba(0,0,0,.05);">
-          <div style="width:50px;height:50px;border-radius:12px;background:#dcfce7;display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0;">🛡️</div>
-          <div><p style="font-weight:900;font-size:14px;color:var(--brown);margin:0 0 4px;">The Immune Window Guide</p><p style="color:#78716c;font-size:13px;margin:0;line-height:1.5;">Exact foods to introduce during your baby's critical immune development window.</p></div>
+        <div style="background:#fff;border-radius:14px;padding:14px;display:flex;align-items:flex-start;gap:12px;box-shadow:0 2px 6px rgba(0,0,0,.05);">
+          <div style="width:46px;height:46px;border-radius:12px;background:#dcfce7;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;">🛡️</div>
+          <div><p style="font-weight:900;font-size:14px;color:var(--brown);margin:0 0 3px;">The Immune Window Guide</p><p style="color:#78716c;font-size:13px;margin:0;line-height:1.5;">The exact foods to introduce during peak immune development — timed to the plan.</p></div>
         </div>
-        <div style="background:#fff;border-radius:14px;padding:14px;display:flex;align-items:flex-start;gap:14px;box-shadow:0 2px 6px rgba(0,0,0,.05);">
-          <div style="width:50px;height:50px;border-radius:12px;background:#e0f2fe;display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0;">❄️</div>
-          <div><p style="font-weight:900;font-size:14px;color:var(--brown);margin:0 0 4px;">Storage & Freezing Masterclass</p><p style="color:#78716c;font-size:13px;margin:0;line-height:1.5;">Batch-cook an entire week in one session. Reclaim your evenings — the smart way.</p></div>
+        <div style="background:#fff;border-radius:14px;padding:14px;display:flex;align-items:flex-start;gap:12px;box-shadow:0 2px 6px rgba(0,0,0,.05);">
+          <div style="width:46px;height:46px;border-radius:12px;background:#e0f2fe;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;">❄️</div>
+          <div><p style="font-weight:900;font-size:14px;color:var(--brown);margin:0 0 3px;">Storage & Freezing Masterclass</p><p style="color:#78716c;font-size:13px;margin:0;line-height:1.5;">Batch-cook a full week in one session. You'll get your evenings back.</p></div>
         </div>
-        <div style="background:#fff;border-radius:14px;padding:14px;display:flex;align-items:flex-start;gap:14px;box-shadow:0 2px 6px rgba(0,0,0,.05);">
-          <div style="width:50px;height:50px;border-radius:12px;background:#fce7f3;display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0;">💨</div>
-          <div><p style="font-weight:900;font-size:14px;color:var(--brown);margin:0 0 4px;">Choking vs. GAG Reflex Guide</p><p style="color:#78716c;font-size:13px;margin:0;line-height:1.5;">Know the difference instantly — respond with confidence, not panic.</p></div>
+        <div style="background:#fff;border-radius:14px;padding:14px;display:flex;align-items:flex-start;gap:12px;box-shadow:0 2px 6px rgba(0,0,0,.05);">
+          <div style="width:46px;height:46px;border-radius:12px;background:#fce7f3;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;">💨</div>
+          <div><p style="font-weight:900;font-size:14px;color:var(--brown);margin:0 0 3px;">Choking vs. GAG Reflex Guide</p><p style="color:#78716c;font-size:13px;margin:0;line-height:1.5;">Know the difference instantly. Respond with calm — not panic. Every parent needs this.</p></div>
         </div>
       </div>
     </div>
 
-    <a href="#order" class="btn-terra btn-pulse">GET INSTANT ACCESS NOW →</a>
-    <p style="text-align:center;font-size:12px;color:#a8a29e;margin-top:10px;">⚠️ If you close this page now, this offer disappears forever.</p>
+    <!-- Urgency thread #2 -->
+    <div class="urgency-strip" style="margin-bottom:24px;">
+      🕐 <strong>9,000+ moms have already started this plan.</strong> The ones who waited said they wished they hadn't — this window doesn't wait.
+    </div>
+
+    <a href="#order" class="btn btn-pulse">Give My Baby the Best Start — $17</a>
+    <p style="text-align:center;font-size:12px;color:#a8a29e;margin:10px 0 0;">⚠️ This price disappears when the timer hits zero.</p>
   </div>
 </section>
 
-<!-- ══ COMPARISON ════════════════════════════════════════════════ -->
-<section style="background:var(--beige);padding:56px 20px;">
-  <div style="max-width:680px;margin:0 auto;">
-    <p class="section-label">A clear picture</p>
-    <h2 class="section-h2" style="margin-bottom:28px;">Imagine how mealtime could feel…</h2>
 
-    <!-- Table header (desktop only via CSS) -->
+<!-- ══ COMPARISON TABLE ═══════════════════════════════════════════
+     DESIGN: Mobile card stacks / desktop 3-col. Emotionally titled.
+     COPY: "You already know the difference. You're living it."
+──────────────────────────────────────────────────────────────── -->
+<section style="background:var(--beige);padding:56px 20px;">
+  <div class="inner">
+    <p class="label">A clear picture</p>
+    <h2 class="h2" style="margin-bottom:6px;">You Already Know<br/>the Difference.</h2>
+    <p class="sub" style="margin-bottom:28px;">You're living one side of this table right now. Here's what the other side looks like.</p>
+
     <div style="background:#fff;border-radius:20px;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,.08);">
+      <!-- Desktop header -->
       <div class="cmp-head">
-        <div style="padding:14px 16px;background:#f5f0e8;"><p style="font-weight:900;font-size:11px;color:#9ca3af;letter-spacing:.08em;text-transform:uppercase;margin:0;">What Changes</p></div>
+        <div style="padding:14px 16px;background:#f5f0e8;"><p style="font-weight:900;font-size:11px;color:#9ca3af;letter-spacing:.08em;text-transform:uppercase;margin:0;">What changes</p></div>
         <div style="padding:14px 16px;text-align:center;background:var(--sage);"><p style="font-weight:900;font-size:13px;color:#fff;margin:0;">✅ With The Baby Foodie</p></div>
         <div style="padding:14px 16px;text-align:center;background:#b91c1c;"><p style="font-weight:900;font-size:13px;color:#fff;margin:0;">❌ Without It</p></div>
       </div>
-      <div style="padding:12px 12px 4px;" class="cmp-mobile-header">
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:10px;">
-          <div style="background:#f0faf1;border-radius:10px;padding:8px 10px;text-align:center;"><p style="font-size:12px;font-weight:900;color:#3d6b43;margin:0;">✅ With The Plan</p></div>
-          <div style="background:#fff5f5;border-radius:10px;padding:8px 10px;text-align:center;"><p style="font-size:12px;font-weight:900;color:#c0392b;margin:0;">❌ Without It</p></div>
-        </div>
+      <!-- Mobile legend -->
+      <div class="cmp-mobile-legend" style="display:grid;grid-template-columns:1fr 1fr;gap:6px;padding:12px 12px 4px;">
+        <div style="background:#f0faf1;border-radius:10px;padding:8px;text-align:center;"><p style="font-size:12px;font-weight:900;color:#3d6b43;margin:0;">✅ With the Plan</p></div>
+        <div style="background:#fff5f5;border-radius:10px;padding:8px;text-align:center;"><p style="font-size:12px;font-weight:900;color:#c0392b;margin:0;">❌ Without It</p></div>
       </div>
-
-      <!-- Row 1 -->
-      <div class="cmp-row">
-        <div class="cmp-label">Daily mealtime mood</div>
-        <div class="cmp-cells">
-          <div class="cmp-yes"><span class="cmp-yes-icon">✓</span>Calm, confident & joyful</div>
-          <div class="cmp-no"><span class="cmp-no-icon">✕</span>Stressful & chaotic every day</div>
-        </div>
-      </div>
-      <!-- Row 2 -->
-      <div class="cmp-row">
-        <div class="cmp-label">Food variety</div>
-        <div class="cmp-cells">
-          <div class="cmp-yes"><span class="cmp-yes-icon">✓</span>Wide, adventurous palate</div>
-          <div class="cmp-no"><span class="cmp-no-icon">✕</span>Same 3 foods on repeat</div>
-        </div>
-      </div>
-      <!-- Row 3 -->
-      <div class="cmp-row">
-        <div class="cmp-label">Fear of choking</div>
-        <div class="cmp-cells">
-          <div class="cmp-yes"><span class="cmp-yes-icon">✓</span>Eliminated with clear guides</div>
-          <div class="cmp-no"><span class="cmp-no-icon">✕</span>Constant anxiety every bite</div>
-        </div>
-      </div>
-      <!-- Row 4 -->
-      <div class="cmp-row">
-        <div class="cmp-label">Weekly planning time</div>
-        <div class="cmp-cells">
-          <div class="cmp-yes"><span class="cmp-yes-icon">✓</span>Saves 3+ hours every week</div>
-          <div class="cmp-no"><span class="cmp-no-icon">✕</span>Hours wasted searching online</div>
-        </div>
-      </div>
-      <!-- Row 5 -->
-      <div class="cmp-row">
-        <div class="cmp-label">Picky eater risk</div>
-        <div class="cmp-cells">
-          <div class="cmp-yes"><span class="cmp-yes-icon">✓</span>Prevented from the very start</div>
-          <div class="cmp-no"><span class="cmp-no-icon">✕</span>Gets worse with each meal</div>
-        </div>
-      </div>
-      <!-- Row 6 -->
-      <div class="cmp-row">
-        <div class="cmp-label">Nutritional certainty</div>
-        <div class="cmp-cells">
-          <div class="cmp-yes"><span class="cmp-yes-icon">✓</span>Expert-backed, stage-specific</div>
-          <div class="cmp-no"><span class="cmp-no-icon">✕</span>Constant second-guessing</div>
-        </div>
-      </div>
+      <!-- Rows -->
+      <div class="cmp-row"><div class="cmp-label">Mealtime mood</div><div class="cmp-cells"><div class="cmp-yes"><span class="cmp-yes-icon">✓</span>Calm, confident & joyful</div><div class="cmp-no"><span class="cmp-no-icon">✕</span>Dreading 5pm every day</div></div></div>
+      <div class="cmp-row"><div class="cmp-label">Food variety</div><div class="cmp-cells"><div class="cmp-yes"><span class="cmp-yes-icon">✓</span>Wide, adventurous palate</div><div class="cmp-no"><span class="cmp-no-icon">✕</span>Same 3 foods on repeat</div></div></div>
+      <div class="cmp-row"><div class="cmp-label">Choking fear</div><div class="cmp-cells"><div class="cmp-yes"><span class="cmp-yes-icon">✓</span>Clear guides replace fear</div><div class="cmp-no"><span class="cmp-no-icon">✕</span>Terror at every bite</div></div></div>
+      <div class="cmp-row"><div class="cmp-label">Time spent planning</div><div class="cmp-cells"><div class="cmp-yes"><span class="cmp-yes-icon">✓</span>Saves 3+ hours weekly</div><div class="cmp-no"><span class="cmp-no-icon">✕</span>Hours wasted, still unsure</div></div></div>
+      <div class="cmp-row"><div class="cmp-label">Picky eater risk</div><div class="cmp-cells"><div class="cmp-yes"><span class="cmp-yes-icon">✓</span>Prevented from day one</div><div class="cmp-no"><span class="cmp-no-icon">✕</span>Gets worse every week</div></div></div>
+      <div class="cmp-row"><div class="cmp-label">Nutritional confidence</div><div class="cmp-cells"><div class="cmp-yes"><span class="cmp-yes-icon">✓</span>Expert-designed for each stage</div><div class="cmp-no"><span class="cmp-no-icon">✕</span>Constant second-guessing</div></div></div>
     </div>
 
     <div style="margin-top:24px;">
-      <a href="#order" class="btn-terra btn-pulse">START WITH CONFIDENCE TODAY →</a>
+      <a href="#order" class="btn btn-pulse">Switch to the Other Side — $17</a>
     </div>
   </div>
 </section>
 
-<!-- ══ STAR TESTIMONIALS ══════════════════════════════════════════ -->
+
+<!-- ══ STAR TESTIMONIALS ══════════════════════════════════════════
+     DESIGN: 3 stacked cards, each with specific outcome quote.
+     COPY: Specific results, real names, real countries.
+──────────────────────────────────────────────────────────────── -->
 <section style="background:var(--cream);padding:56px 20px;">
-  <div style="max-width:680px;margin:0 auto;">
-    <p class="section-label" style="color:var(--sage-d);">Over 9,000 happy families</p>
-    <h2 class="section-h2">What our moms are saying</h2>
+  <div class="inner">
+    <p class="label" style="color:var(--sage-d);">9,000+ moms made this decision</p>
+    <h2 class="h2" style="margin-bottom:6px;">Here's What Happened<br/>When They Did</h2>
     <div style="text-align:center;font-size:22px;color:#f59e0b;margin-bottom:4px;">★★★★★</div>
-    <p style="text-align:center;color:#a8a29e;font-size:13px;margin-bottom:32px;">4.9/5 — based on 2,400+ reviews</p>
+    <p style="text-align:center;color:#a8a29e;font-size:13px;margin-bottom:32px;">4.9 out of 5 · 2,400+ verified reviews</p>
 
     <div style="display:flex;flex-direction:column;gap:16px;">
       <div style="background:#fff;border-radius:20px;padding:20px;box-shadow:0 4px 16px rgba(0,0,0,.07);border-top:4px solid var(--terra);">
         <div style="color:#f59e0b;font-size:14px;margin-bottom:10px;">★★★★★</div>
-        <p style="color:#78716c;font-size:14px;line-height:1.65;margin:0 0 16px;">"My 9-month-old now tries every new food without fuss. I used to spend 45 minutes panicking every morning — now it's 10 minutes and done. Genuinely life-changing."</p>
+        <p style="color:#78716c;font-size:15px;line-height:1.7;margin:0 0 16px;"><strong style="color:var(--brown);">"I used to spend 45 minutes panicking every morning."</strong> My 9-month-old now tries every new food without fuss. Now it takes 10 minutes and I actually enjoy it. Genuinely life-changing.</p>
         <div style="display:flex;align-items:center;gap:10px;">
           <div style="width:42px;height:42px;border-radius:50%;overflow:hidden;flex-shrink:0;"><img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=80&q=80" alt="Sarah" loading="lazy" style="width:100%;height:100%;object-fit:cover;" /></div>
           <div><p style="font-weight:900;font-size:14px;color:var(--brown);margin:0;">Sarah M.</p><p style="color:#a8a29e;font-size:12px;margin:0;">Mom of 1 · USA 🇺🇸</p></div>
@@ -575,7 +546,7 @@
 
       <div style="background:#fff;border-radius:20px;padding:20px;box-shadow:0 4px 16px rgba(0,0,0,.07);border-top:4px solid var(--sage);">
         <div style="color:#f59e0b;font-size:14px;margin-bottom:10px;">★★★★★</div>
-        <p style="color:#78716c;font-size:14px;line-height:1.65;margin:0 0 16px;">"The choking vs. gag guide alone was worth every cent. I finally stopped dreading solid foods. My 14-month-old eats avocado, salmon, and lentils — I can barely believe it!"</p>
+        <p style="color:#78716c;font-size:15px;line-height:1.7;margin:0 0 16px;"><strong style="color:var(--brown);">"The choking vs. gag guide alone was worth every cent."</strong> I finally stopped dreading solid foods. My 14-month-old eats avocado, salmon, and lentils — I still can't believe it.</p>
         <div style="display:flex;align-items:center;gap:10px;">
           <div style="width:42px;height:42px;border-radius:50%;overflow:hidden;flex-shrink:0;"><img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=80&q=80" alt="Camila" loading="lazy" style="width:100%;height:100%;object-fit:cover;" /></div>
           <div><p style="font-weight:900;font-size:14px;color:var(--brown);margin:0;">Camila R.</p><p style="color:#a8a29e;font-size:12px;margin:0;">Mom of 2 · Brazil 🇧🇷</p></div>
@@ -584,69 +555,81 @@
 
       <div style="background:#fff;border-radius:20px;padding:20px;box-shadow:0 4px 16px rgba(0,0,0,.07);border-top:4px solid #e8a040;">
         <div style="color:#f59e0b;font-size:14px;margin-bottom:10px;">★★★★★</div>
-        <p style="color:#78716c;font-size:14px;line-height:1.65;margin:0 0 16px;">"First-time mom, completely clueless. The week-by-week layout made it impossible to mess up. My daughter is 22 months and eats more variety than most adults I know."</p>
+        <p style="color:#78716c;font-size:15px;line-height:1.7;margin:0 0 16px;"><strong style="color:var(--brown);">"I was completely clueless."</strong> The week-by-week layout made it impossible to mess up. My daughter is 22 months and eats more variety than most adults I know. Worth every dollar — a hundred times over.</p>
         <div style="display:flex;align-items:center;gap:10px;">
           <div style="width:42px;height:42px;border-radius:50%;overflow:hidden;flex-shrink:0;"><img src="https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=80&q=80" alt="Amina" loading="lazy" style="width:100%;height:100%;object-fit:cover;" /></div>
-          <div><p style="font-weight:900;font-size:14px;color:var(--brown);margin:0;">Amina K.</p><p style="color:#a8a29e;font-size:12px;margin:0;">Mom of 1 · UK 🇬🇧</p></div>
+          <div><p style="font-weight:900;font-size:14px;color:var(--brown);margin:0;">Amina K.</p><p style="color:#a8a29e;font-size:12px;margin:0;">First-time Mom · UK 🇬🇧</p></div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ══ ORDER BOX ══════════════════════════════════════════════════ -->
+
+<!-- ══ OFFER BOX ══════════════════════════════════════════════════
+     DESIGN: Terra background wraps white card. High-contrast, premium.
+     COPY: "You're not buying a meal plan. You're buying peace of mind."
+──────────────────────────────────────────────────────────────── -->
 <section id="order" style="background:var(--terra);padding:48px 20px;">
+
+  <!-- Decision moment reinforcement — ABOVE the box -->
+  <div style="max-width:480px;margin:0 auto 24px;text-align:center;">
+    <p style="color:#fde8e4;font-size:16px;font-weight:700;line-height:1.6;margin:0;">
+      Your baby is growing right now.<br/>
+      <strong style="color:#fff;">This stage doesn't come back.</strong><br/>
+      Don't spend another week winging it.
+    </p>
+  </div>
+
   <div style="max-width:480px;margin:0 auto;">
     <div style="background:#fff;border-radius:24px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.25);">
       <div style="background:var(--brown);color:#fff;text-align:center;padding:20px;">
-        <p style="font-size:11px;font-weight:900;letter-spacing:.1em;opacity:.6;text-transform:uppercase;margin:0 0 4px;">For a limited time only</p>
+        <p style="font-size:11px;font-weight:900;letter-spacing:.1em;opacity:.55;text-transform:uppercase;margin:0 0 4px;">For a limited time only</p>
         <p style="font-weight:900;font-size:19px;margin:0;">The Baby Foodie — Complete System</p>
         <p style="font-size:13px;opacity:.65;margin:4px 0 0;">6 to 24 Months · Instant Digital Access</p>
       </div>
 
       <div style="padding:24px;">
+        <!-- What they're really getting -->
+        <p style="font-size:13px;font-weight:800;color:var(--terra);margin:0 0 14px;text-transform:uppercase;letter-spacing:.05em;">You're not just buying a meal plan. You're buying:</p>
         <ul style="list-style:none;padding:0;margin:0 0 20px;display:flex;flex-direction:column;gap:12px;">
-          <li class="chk" style="font-size:14px;">18 Months of Complete Weekly Meal Plans</li>
-          <li class="chk" style="font-size:14px;">Ready-to-Use Weekly Shopping Lists</li>
-          <li class="chk" style="font-size:14px;">Step-by-Step Food Prep Guides</li>
-          <li class="chk" style="font-size:14px;">Safe Substitution & Natural Seasoning Lists</li>
-          <li class="chk" style="font-size:14px;"><span><strong>BONUS:</strong> Safe Fruit Cutting Techniques</span></li>
-          <li class="chk" style="font-size:14px;"><span><strong>BONUS:</strong> The Immune Window Guide</span></li>
-          <li class="chk" style="font-size:14px;"><span><strong>BONUS:</strong> Storage & Freezing Masterclass</span></li>
-          <li class="chk" style="font-size:14px;"><span><strong>BONUS:</strong> Choking vs. GAG Reflex Guide</span></li>
-          <li class="chk" style="font-size:14px;">Daily Email Support for All Students</li>
+          <li class="chk" style="font-size:14px;">Peace of mind at every single mealtime</li>
+          <li class="chk" style="font-size:14px;">18 months of clarity — no more guessing</li>
+          <li class="chk" style="font-size:14px;">A baby who grows up eating with variety & confidence</li>
+          <li class="chk" style="font-size:14px;"><span><strong>+4 expert bonus guides</strong> (Safety · Immunity · Storage · Choking)</span></li>
+          <li class="chk" style="font-size:14px;">Daily email support — you're never alone</li>
         </ul>
 
-        <!-- Price block -->
+        <!-- Price display -->
         <div style="background:#faf9f6;border-radius:16px;padding:20px;text-align:center;border:1px solid #ede8e0;margin-bottom:18px;">
-          <p style="color:#a8a29e;font-size:13px;font-weight:600;margin:0;">Total Value:</p>
-          <p style="color:#d4cec8;font-size:24px;font-weight:900;text-decoration:line-through;margin:2px 0 6px;">$465</p>
-          <p style="color:#78716c;font-size:13px;font-weight:600;margin:0 0 4px;">Your Price Today:</p>
-          <p class="shimmer-price" style="font-size:64px;font-weight:900;line-height:1;margin:0;">$17</p>
-          <p style="color:#16a34a;font-weight:900;font-size:13px;margin:8px 0 0;">You save $448 — 96% off today only!</p>
+          <p style="color:#a8a29e;font-size:13px;font-weight:600;margin:0;">If sold separately, this would cost:</p>
+          <p style="color:#d4cec8;font-size:24px;font-weight:900;text-decoration:line-through;margin:2px 0 10px;">$465</p>
+          <div style="height:1px;background:#ede8e0;margin:0 0 10px;"></div>
+          <p style="color:#78716c;font-size:13px;font-weight:700;margin:0 0 4px;">Your price today — before the timer runs out:</p>
+          <p class="shimmer-price" style="font-size:68px;font-weight:900;line-height:1;margin:0;">$17</p>
+          <p style="color:#16a34a;font-weight:900;font-size:13px;margin:8px 0 0;">You save $448 · That's 96% off</p>
         </div>
 
-        <!-- Scarcity bar -->
+        <!-- Scarcity -->
         <div style="margin-bottom:16px;">
           <div style="display:flex;justify-content:space-between;font-size:12px;font-weight:900;color:#78716c;margin-bottom:6px;">
             <span>🔥 Spots claimed at this price</span>
             <span style="color:var(--terra);">87% gone</span>
           </div>
-          <div style="background:#e7e5e4;border-radius:50px;height:14px;overflow:hidden;">
-            <div class="progress-fill"></div>
-          </div>
-          <p style="font-size:11px;color:#a8a29e;margin:6px 0 0;">Only <strong style="color:var(--terra);"><span id="spots-box">13</span> spots</strong> remain at $17.</p>
+          <div style="background:#e7e5e4;border-radius:50px;height:14px;overflow:hidden;"><div class="progress-fill"></div></div>
+          <p style="font-size:11px;color:#a8a29e;margin:6px 0 0;">Only <strong style="color:var(--terra);"><span id="spots-box">13</span> spots</strong> at $17. Price doubles when the timer hits zero.</p>
         </div>
 
-        <!-- Timer -->
+        <!-- Timer in box -->
         <div style="display:flex;align-items:center;justify-content:center;gap:8px;background:#faf9f6;border-radius:12px;padding:12px;margin-bottom:20px;">
           <p style="font-size:12px;font-weight:900;color:#78716c;margin:0;">⏰ This price expires in:</p>
           <p style="font-weight:900;font-size:18px;color:var(--terra);margin:0;" id="box-timer">--:--:--</p>
         </div>
 
-        <a href="#" class="btn-terra btn-pulse" style="font-size:18px;">🛒 I WANT MY MEAL PLAN!</a>
-        <p style="text-align:center;font-size:11px;color:#a8a29e;margin:10px 0 0;">🔒 256-bit SSL · Instant Email · Works on Any Device</p>
-        <div style="display:flex;justify-content:center;gap:6px;margin-top:10px;opacity:.35;flex-wrap:wrap;">
+        <!-- THE CTA -->
+        <a href="#" class="btn btn-pulse" style="font-size:18px;margin-bottom:10px;">Give My Baby the Best Start — $17</a>
+        <p style="text-align:center;font-size:11px;color:#a8a29e;margin:0 0 10px;">🔒 256-bit SSL · Instant email delivery · Works on any device</p>
+        <div style="display:flex;justify-content:center;gap:6px;opacity:.35;flex-wrap:wrap;">
           <span style="font-size:11px;background:#e7e5e4;padding:3px 8px;border-radius:4px;font-weight:900;">VISA</span>
           <span style="font-size:11px;background:#e7e5e4;padding:3px 8px;border-radius:4px;font-weight:900;">MASTERCARD</span>
           <span style="font-size:11px;background:#e7e5e4;padding:3px 8px;border-radius:4px;font-weight:900;">PayPal</span>
@@ -657,148 +640,186 @@
   </div>
 </section>
 
-<!-- ══ GUARANTEE ══════════════════════════════════════════════════ -->
-<section style="background:var(--cream);padding:56px 20px;">
-  <div style="max-width:560px;margin:0 auto;">
-    <p class="section-label">Zero Risk</p>
-    <h2 class="section-h2" style="margin-bottom:28px;">Unconditional Guarantee</h2>
 
-    <div style="background:#fff;border-radius:20px;padding:24px;border:2px solid var(--terra);display:flex;flex-direction:column;align-items:center;gap:20px;text-align:center;">
+<!-- ══ GUARANTEE ══════════════════════════════════════════════════
+     COPY: First-person, personal, removes ALL perceived risk.
+──────────────────────────────────────────────────────────────── -->
+<section style="background:var(--cream);padding:56px 20px;">
+  <div class="inner-sm">
+    <p class="label">Zero risk on your end</p>
+    <h2 class="h2" style="margin-bottom:24px;">Try It for 30 Days.<br/>If It Doesn't Work — I Pay.</h2>
+    <div style="background:#fff;border-radius:20px;padding:24px;border:2px solid var(--terra);display:flex;flex-direction:column;align-items:center;gap:20px;">
       <div class="guarantee-badge">
-        <span style="font-size:34px;">🛡️</span>
+        <span style="font-size:32px;">🛡️</span>
         <p style="font-weight:900;font-size:11px;color:var(--terra);margin:4px 0 0;">30 DAYS</p>
         <p style="font-weight:900;font-size:11px;color:var(--terra);margin:0;">MONEY BACK</p>
       </div>
-      <div style="text-align:left;">
-        <h3 style="font-size:18px;font-weight:900;color:var(--brown);margin:0 0 10px;">30-Day Unconditional Money-Back Guarantee</h3>
-        <p style="color:#78716c;font-size:14px;line-height:1.7;margin:0 0 10px;">Try The Baby Foodie for 30 days. If it doesn't simplify your routine in the <strong>very first week</strong> — for any reason — send one email and get a 100% full refund within 48 hours.</p>
-        <p style="color:#78716c;font-size:14px;line-height:1.7;margin:0;">No questions. No hoops. <strong>The risk is entirely mine.</strong> The only risk on your side is staying stuck in the same stressful routine.</p>
+      <div>
+        <p style="color:#78716c;font-size:15px;line-height:1.75;margin:0 0 12px;">I'm so confident The Baby Foodie will transform your mealtimes that I'll take all the risk. Try it for 30 days. If it doesn't make your baby's eating calmer, more varied, and less stressful in the <strong>first week</strong> — just email me.</p>
+        <p style="color:#78716c;font-size:15px;line-height:1.75;margin:0;">No forms to fill. No questions asked. No hoops to jump through. <strong style="color:var(--brown);">You get every cent back within 48 hours.</strong> The only thing you risk is staying stuck in the same routine.</p>
       </div>
     </div>
     <div style="margin-top:24px;">
-      <a href="#order" class="btn-terra btn-inline">START TODAY WITHOUT RISK →</a>
+      <a href="#order" class="btn btn-sm" style="max-width:360px;margin:0 auto;">Start Today — Zero Risk</a>
     </div>
   </div>
 </section>
 
-<!-- ══ WHO AM I ═══════════════════════════════════════════════════ -->
+
+<!-- ══ AUTHORITY — WHO AM I ════════════════════════════════════════
+     DESIGN: Moved after guarantee. Authority validates, not sells.
+──────────────────────────────────────────────────────────────── -->
 <section style="background:var(--beige);padding:56px 20px;">
-  <div style="max-width:600px;margin:0 auto;">
-    <p class="section-label">Who Am I to Transform Your Baby's Introduction to Food?</p>
+  <div class="inner">
+    <p class="label">The person behind the plan</p>
     <div style="background:#fff;border-radius:20px;padding:24px;box-shadow:0 4px 20px rgba(0,0,0,.07);display:flex;flex-direction:column;align-items:center;gap:20px;text-align:center;">
-      <div style="width:140px;height:140px;border-radius:50%;overflow:hidden;flex-shrink:0;box-shadow:0 8px 24px rgba(0,0,0,.12);">
+      <div style="width:130px;height:130px;border-radius:50%;overflow:hidden;flex-shrink:0;box-shadow:0 8px 24px rgba(0,0,0,.12);">
         <img src="https://images.unsplash.com/photo-1594824476967-48c8b964273f?w=300&q=80" alt="Gabi — Specialist Nutritionist" loading="lazy" style="width:100%;height:100%;object-fit:cover;" />
       </div>
       <div style="text-align:left;">
         <p style="font-weight:900;font-size:18px;color:var(--brown);margin:0 0 4px;">Gabi — Specialist Pediatric Nutritionist</p>
-        <p style="font-size:13px;color:var(--terra);font-weight:700;margin:0 0 12px;">BLW & Baby Food Introduction Expert · 9,000+ Families Helped</p>
-        <p style="color:#78716c;font-size:14px;line-height:1.7;margin:0 0 10px;">I've worked with thousands of families across 74 countries to make the transition to solid foods safe, colorful, and calm. I've seen firsthand how the right structure transforms a terrified mom into a confident one who enjoys mealtimes.</p>
-        <p style="color:#78716c;font-size:14px;line-height:1.7;margin:0;">The Baby Foodie is the complete roadmap I wish every mom had from day one — built around real developmental stages, not a generic recipe book.</p>
+        <p style="font-size:13px;color:var(--terra);font-weight:700;margin:0 0 14px;">BLW & Baby Food Introduction Expert · 9,000+ Families Helped in 74 Countries</p>
+        <p style="color:#78716c;font-size:14px;line-height:1.75;margin:0 0 12px;">I built The Baby Foodie because I kept seeing the same thing: brilliant, loving moms completely overwhelmed by something that shouldn't be that hard. You're not failing — you just needed someone to hand you a plan.</p>
+        <p style="color:#78716c;font-size:14px;line-height:1.75;margin:0;">This system is built around how babies actually develop — not generic advice. It grows with your child, stage by stage, bite by bite, from their very first taste all the way to the family table.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ══ FOOD GALLERY ═══════════════════════════════════════════════ -->
+
+<!-- ══ FOOD GALLERY ═══════════════════════════════════════════════
+     DESIGN: 2×4 grid, captions connect image → safety → outcome.
+──────────────────────────────────────────────────────────────── -->
 <section style="background:var(--cream);padding:40px 20px;">
-  <div style="max-width:680px;margin:0 auto;">
-    <p class="section-label">A taste of what's inside</p>
-    <h2 class="section-h2" style="font-size:clamp(22px,5vw,32px);margin-bottom:20px;">Colorful, Real, Nutritious Meals</h2>
+  <div style="max-width:640px;margin:0 auto;">
+    <p class="label">A taste of what's inside</p>
+    <h2 class="h2" style="font-size:clamp(22px,5vw,30px);margin-bottom:20px;">Real Food. Real Stages.<br/>Real Confidence.</h2>
     <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:10px;">
-      <div style="aspect-ratio:1;border-radius:14px;overflow:hidden;box-shadow:0 4px 16px rgba(0,0,0,.1);"><img src="https://images.unsplash.com/photo-1540420773420-3366772f4999?w=400&q=80" alt="Avocado meal" loading="lazy" style="width:100%;height:100%;object-fit:cover;" /></div>
-      <div style="aspect-ratio:1;border-radius:14px;overflow:hidden;box-shadow:0 4px 16px rgba(0,0,0,.1);"><img src="https://images.unsplash.com/photo-1490818387583-1baba5e638af?w=400&q=80" alt="Colorful fruits" loading="lazy" style="width:100%;height:100%;object-fit:cover;" /></div>
-      <div style="aspect-ratio:1;border-radius:14px;overflow:hidden;box-shadow:0 4px 16px rgba(0,0,0,.1);"><img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=400&q=80" alt="Rainbow veggie bowl" loading="lazy" style="width:100%;height:100%;object-fit:cover;" /></div>
-      <div style="aspect-ratio:1;border-radius:14px;overflow:hidden;box-shadow:0 4px 16px rgba(0,0,0,.1);"><img src="https://images.unsplash.com/photo-1606923829579-0cb981a83e2e?w=400&q=80" alt="Baby food bowls" loading="lazy" style="width:100%;height:100%;object-fit:cover;" /></div>
-      <div style="aspect-ratio:1;border-radius:14px;overflow:hidden;box-shadow:0 4px 16px rgba(0,0,0,.1);"><img src="https://images.unsplash.com/photo-1565958011703-44f9829ba187?w=400&q=80" alt="Salad bowl" loading="lazy" style="width:100%;height:100%;object-fit:cover;" /></div>
-      <div style="aspect-ratio:1;border-radius:14px;overflow:hidden;box-shadow:0 4px 16px rgba(0,0,0,.1);"><img src="https://images.unsplash.com/photo-1610832958506-aa56368176cf?w=400&q=80" alt="Smoothie bowl" loading="lazy" style="width:100%;height:100%;object-fit:cover;" /></div>
-      <div style="aspect-ratio:1;border-radius:14px;overflow:hidden;box-shadow:0 4px 16px rgba(0,0,0,.1);"><img src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=400&q=80" alt="Healthy bowl" loading="lazy" style="width:100%;height:100%;object-fit:cover;" /></div>
-      <div style="aspect-ratio:1;border-radius:14px;overflow:hidden;box-shadow:0 4px 16px rgba(0,0,0,.1);"><img src="https://images.unsplash.com/photo-1484723091739-30a097e8f929?w=400&q=80" alt="Oatmeal porridge" loading="lazy" style="width:100%;height:100%;object-fit:cover;" /></div>
+      <div style="border-radius:14px;overflow:hidden;box-shadow:0 4px 16px rgba(0,0,0,.1);position:relative;aspect-ratio:1;"><img src="https://images.unsplash.com/photo-1540420773420-3366772f4999?w=400&q=80" alt="Avocado" loading="lazy" style="width:100%;height:100%;object-fit:cover;" /><div style="position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(0,0,0,.55));padding:8px 10px;"><span style="color:#fff;font-size:11px;font-weight:800;">Safe from 6 months ✓</span></div></div>
+      <div style="border-radius:14px;overflow:hidden;box-shadow:0 4px 16px rgba(0,0,0,.1);position:relative;aspect-ratio:1;"><img src="https://images.unsplash.com/photo-1490818387583-1baba5e638af?w=400&q=80" alt="Colorful fruits" loading="lazy" style="width:100%;height:100%;object-fit:cover;" /><div style="position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(0,0,0,.55));padding:8px 10px;"><span style="color:#fff;font-size:11px;font-weight:800;">Cutting guide included ✓</span></div></div>
+      <div style="border-radius:14px;overflow:hidden;box-shadow:0 4px 16px rgba(0,0,0,.1);position:relative;aspect-ratio:1;"><img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=400&q=80" alt="Rainbow veggie bowl" loading="lazy" style="width:100%;height:100%;object-fit:cover;" /><div style="position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(0,0,0,.55));padding:8px 10px;"><span style="color:#fff;font-size:11px;font-weight:800;">Stage 2 · 9–12 months ✓</span></div></div>
+      <div style="border-radius:14px;overflow:hidden;box-shadow:0 4px 16px rgba(0,0,0,.1);position:relative;aspect-ratio:1;"><img src="https://images.unsplash.com/photo-1606923829579-0cb981a83e2e?w=400&q=80" alt="Baby food bowls" loading="lazy" style="width:100%;height:100%;object-fit:cover;" /><div style="position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(0,0,0,.55));padding:8px 10px;"><span style="color:#fff;font-size:11px;font-weight:800;">Builds variety early ✓</span></div></div>
+      <div style="border-radius:14px;overflow:hidden;box-shadow:0 4px 16px rgba(0,0,0,.1);position:relative;aspect-ratio:1;"><img src="https://images.unsplash.com/photo-1565958011703-44f9829ba187?w=400&q=80" alt="Salad bowl" loading="lazy" style="width:100%;height:100%;object-fit:cover;" /><div style="position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(0,0,0,.55));padding:8px 10px;"><span style="color:#fff;font-size:11px;font-weight:800;">Stage 3 · 12–18 months ✓</span></div></div>
+      <div style="border-radius:14px;overflow:hidden;box-shadow:0 4px 16px rgba(0,0,0,.1);position:relative;aspect-ratio:1;"><img src="https://images.unsplash.com/photo-1610832958506-aa56368176cf?w=400&q=80" alt="Smoothie bowl" loading="lazy" style="width:100%;height:100%;object-fit:cover;" /><div style="position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(0,0,0,.55));padding:8px 10px;"><span style="color:#fff;font-size:11px;font-weight:800;">Nutrient-dense & easy ✓</span></div></div>
+      <div style="border-radius:14px;overflow:hidden;box-shadow:0 4px 16px rgba(0,0,0,.1);position:relative;aspect-ratio:1;"><img src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=400&q=80" alt="Healthy bowl" loading="lazy" style="width:100%;height:100%;object-fit:cover;" /><div style="position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(0,0,0,.55));padding:8px 10px;"><span style="color:#fff;font-size:11px;font-weight:800;">Batch-cook friendly ✓</span></div></div>
+      <div style="border-radius:14px;overflow:hidden;box-shadow:0 4px 16px rgba(0,0,0,.1);position:relative;aspect-ratio:1;"><img src="https://images.unsplash.com/photo-1484723091739-30a097e8f929?w=400&q=80" alt="Oatmeal" loading="lazy" style="width:100%;height:100%;object-fit:cover;" /><div style="position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(0,0,0,.55));padding:8px 10px;"><span style="color:#fff;font-size:11px;font-weight:800;">Stage 1 · 6 months ✓</span></div></div>
     </div>
   </div>
 </section>
 
-<!-- ══ FAQ ════════════════════════════════════════════════════════ -->
+
+<!-- ══ FAQ ═════════════════════════════════════════════════════════
+     COPY: Every answer reinforces the sale. Doubt → resolved.
+──────────────────────────────────────────────────────────────── -->
 <section style="background:var(--beige);padding:56px 20px;">
-  <div style="max-width:560px;margin:0 auto;">
-    <p class="section-label">Got questions?</p>
-    <h2 class="section-h2" style="margin-bottom:28px;">FAQ</h2>
+  <div class="inner-sm">
+    <p class="label">Got doubts? Good.</p>
+    <h2 class="h2" style="margin-bottom:28px;">Let's Answer Them<br/>Right Now</h2>
     <div style="display:flex;flex-direction:column;gap:10px;">
 
       <div style="background:#fff;border-radius:16px;overflow:hidden;border:1px solid #ede8e0;">
         <button class="faq-btn" onclick="toggleFaq(this)">
-          <span style="font-weight:900;font-size:15px;color:var(--brown);text-align:left;line-height:1.4;">My baby is under 6 months — can I start now?</span>
+          <span style="font-weight:900;font-size:15px;color:var(--brown);text-align:left;line-height:1.4;">My baby is under 6 months — should I wait to buy?</span>
           <span class="faq-icon">−</span>
         </button>
-        <div class="faq-body open"><div class="faq-answer">Absolutely! Many moms purchase during pregnancy or in the newborn weeks. Reading the guides now means you'll feel <strong>completely prepared and calm</strong> the moment your baby is ready for solids. Knowledge is the best kind of head start.</div></div>
+        <div class="faq-body open">
+          <div class="faq-answer">Don't wait. Many moms buy during pregnancy or in the early newborn weeks — and they're the ones who feel the most prepared when solids actually start. Reading everything ahead of time means zero panic when the moment arrives. The price is lower now. Start now.</div>
+        </div>
       </div>
 
       <div style="background:#fff;border-radius:16px;overflow:hidden;border:1px solid #ede8e0;">
         <button class="faq-btn" onclick="toggleFaq(this)">
-          <span style="font-weight:900;font-size:15px;color:var(--brown);text-align:left;line-height:1.4;">Is there support if I get stuck?</span>
+          <span style="font-weight:900;font-size:15px;color:var(--brown);text-align:left;line-height:1.4;">What if I get stuck or have questions?</span>
           <span class="faq-icon">+</span>
         </button>
-        <div class="faq-body"><div class="faq-answer">Yes — every student receives daily email support. Send any question and you'll receive a personalized reply. You are never navigating this alone; we're here with you through every stage.</div></div>
+        <div class="faq-body">
+          <div class="faq-answer">You get daily email support — a real answer to your real question, not a chatbot. Over 9,000 moms across 74 countries have used this. We've seen almost every situation. You're not navigating this alone.</div>
+        </div>
       </div>
 
       <div style="background:#fff;border-radius:16px;overflow:hidden;border:1px solid #ede8e0;">
         <button class="faq-btn" onclick="toggleFaq(this)">
-          <span style="font-weight:900;font-size:15px;color:var(--brown);text-align:left;line-height:1.4;">How do I access everything after purchasing?</span>
+          <span style="font-weight:900;font-size:15px;color:var(--brown);text-align:left;line-height:1.4;">How do I access it after I buy?</span>
           <span class="faq-icon">+</span>
         </button>
-        <div class="faq-body"><div class="faq-answer">Immediately after checkout you'll receive an email with your download link. Everything is available as a digital PDF on any device — phone, tablet, or computer — instantly, 24/7, no app needed.</div></div>
+        <div class="faq-body">
+          <div class="faq-answer">The moment your payment goes through, you get an email with your download link. Everything is a PDF — open it on your phone, tablet, or computer. No apps. No passwords to remember. Instant and permanent access.</div>
+        </div>
       </div>
 
       <div style="background:#fff;border-radius:16px;overflow:hidden;border:1px solid #ede8e0;">
         <button class="faq-btn" onclick="toggleFaq(this)">
-          <span style="font-weight:900;font-size:15px;color:var(--brown);text-align:left;line-height:1.4;">Does it cover baby-led weaning (BLW) or only purées?</span>
+          <span style="font-weight:900;font-size:15px;color:var(--brown);text-align:left;line-height:1.4;">Is this purée-only, or does it cover BLW and finger foods too?</span>
           <span class="faq-icon">+</span>
         </button>
-        <div class="faq-body"><div class="faq-answer">Both! The system covers the full spectrum — smooth purées at 6 months through mashed, soft-chunked, and full finger foods. It transitions naturally through each developmental stage at the right pace for your baby.</div></div>
+        <div class="faq-body">
+          <div class="faq-answer">Both, and everything in between. The system starts with smooth purées at 6 months and progresses naturally — mashed, soft-chunked, full finger foods — so your baby's development leads the way. You don't have to pick one approach.</div>
+        </div>
       </div>
 
       <div style="background:#fff;border-radius:16px;overflow:hidden;border:1px solid #ede8e0;">
         <button class="faq-btn" onclick="toggleFaq(this)">
-          <span style="font-weight:900;font-size:15px;color:var(--brown);text-align:left;line-height:1.4;">What if my baby has food allergies?</span>
+          <span style="font-weight:900;font-size:15px;color:var(--brown);text-align:left;line-height:1.4;">My baby has allergies. Will this still work?</span>
           <span class="faq-icon">+</span>
         </button>
-        <div class="faq-body"><div class="faq-answer">The Safe Substitution Guide was designed exactly for this. Common allergens are clearly flagged, and every meal includes a safe swap option. Always introduce allergens following your pediatrician's guidance.</div></div>
+        <div class="faq-body">
+          <div class="faq-answer">Yes. Every meal comes with a safe swap. Common allergens are clearly flagged throughout the plan. You can always substitute confidently — the substitution guide tells you exactly what to use. As always, introduce new allergens following your pediatrician's guidance.</div>
+        </div>
       </div>
 
       <div style="background:#fff;border-radius:16px;overflow:hidden;border:1px solid #ede8e0;">
         <button class="faq-btn" onclick="toggleFaq(this)">
-          <span style="font-weight:900;font-size:15px;color:var(--brown);text-align:left;line-height:1.4;">Do I need to be a good cook?</span>
+          <span style="font-weight:900;font-size:15px;color:var(--brown);text-align:left;line-height:1.4;">I'm not a confident cook. Will I manage this?</span>
           <span class="faq-icon">+</span>
         </button>
-        <div class="faq-body"><div class="faq-answer">Not at all. The guides are built for real, busy parents — not chefs. Most meals take under 15 minutes, and the batch-cooking guide lets you prep an entire week in one session.</div></div>
+        <div class="faq-body">
+          <div class="faq-answer">This was built for exactly that. Most meals take under 15 minutes. The prep guides assume zero cooking skill. And the freezing masterclass teaches you how to prep a full week in one session — so you cook once and eat all week.</div>
+        </div>
       </div>
 
       <div style="background:#fff;border-radius:16px;overflow:hidden;border:1px solid #ede8e0;">
         <button class="faq-btn" onclick="toggleFaq(this)">
-          <span style="font-weight:900;font-size:15px;color:var(--brown);text-align:left;line-height:1.4;">Is the 30-day guarantee really no-questions-asked?</span>
+          <span style="font-weight:900;font-size:15px;color:var(--brown);text-align:left;line-height:1.4;">What if it doesn't work for us?</span>
           <span class="faq-icon">+</span>
         </button>
-        <div class="faq-body"><div class="faq-answer">Completely. Email within 30 days and receive a full refund within 48 hours — no explanation required, no back-and-forth. You have absolutely nothing to lose.</div></div>
+        <div class="faq-body">
+          <div class="faq-answer">Email within 30 days and you get a full refund within 48 hours. No form to fill. No explanation needed. $17 is not a risk — it's the cost of three coffees. The risk is another week without a plan.</div>
+        </div>
       </div>
-
     </div>
   </div>
 </section>
 
-<!-- ══ FINAL CTA ══════════════════════════════════════════════════ -->
+
+<!-- ══ FINAL CTA ══════════════════════════════════════════════════
+     DESIGN: Deep green bg (calm/trust). Emotional headline. Big CTA.
+     COPY: Future-pacing. Make them see the "after."
+──────────────────────────────────────────────────────────────── -->
 <section style="background:var(--sage-d);padding:56px 20px;text-align:center;">
   <div style="max-width:480px;margin:0 auto;">
-    <div style="font-size:44px;margin-bottom:12px;">👶🥗💚</div>
-    <h2 style="font-family:'Playfair Display',serif;font-size:clamp(26px,6vw,38px);color:#fff;margin:0 0 12px;line-height:1.2;">Your Baby's Healthiest Habit Starts Today</h2>
-    <p style="color:#b2d8b5;font-size:16px;line-height:1.65;margin:0 auto 28px;max-width:380px;">Join 9,000+ moms who traded mealtime stress for confidence, variety, and joy — one colorful plate at a time.</p>
-    <a href="#order" class="btn-terra btn-pulse" style="background:var(--terra);max-width:420px;margin:0 auto;">🛒 GET INSTANT ACCESS — ONLY $17</a>
+    <div style="font-size:40px;margin-bottom:14px;">👶🥗💚</div>
+    <h2 style="font-family:'Playfair Display',serif;font-size:clamp(26px,6vw,38px);color:#fff;margin:0 0 14px;line-height:1.2;">
+      Imagine Tomorrow Morning<br/>
+      <em style="color:#b2d8b5;font-style:italic;">Without the Panic.</em>
+    </h2>
+    <p style="color:#b2d8b5;font-size:16px;line-height:1.7;margin:0 auto 10px;max-width:380px;">You wake up. You open the plan. You know exactly what you're making. Your baby eats something new, something colorful, something safe.</p>
+    <p style="color:#fff;font-size:16px;font-weight:800;line-height:1.6;margin:0 auto 28px;max-width:380px;">That's what 9,000+ moms unlocked for $17. Today, it's your turn.</p>
+
+    <!-- Urgency thread #3 — final -->
+    <div style="background:rgba(255,255,255,.1);border-radius:14px;padding:14px 18px;margin-bottom:24px;">
+      <p style="color:#fde8e4;font-size:13px;font-weight:800;margin:0;">⏳ <span id="spots-final">13 spots</span> left at $17 · Timer: <span id="final-timer" style="color:#fff;">--:--</span></p>
+    </div>
+
+    <a href="#order" class="btn btn-pulse" style="background:var(--terra);max-width:420px;margin:0 auto;font-size:18px;">Give My Baby the Best Start — $17</a>
     <p style="color:#b2d8b5;font-size:12px;margin-top:12px;">30-Day Money-Back Guarantee · Instant Access · No Questions Asked</p>
   </div>
 </section>
 
+
 <!-- ══ FOOTER ═════════════════════════════════════════════════════ -->
 <footer style="background:var(--brown);color:#a8a29e;text-align:center;padding:28px 20px;font-size:12px;line-height:1.7;">
   <p style="margin:0 0 6px;">© 2026 The Baby Foodie. All Rights Reserved.</p>
-  <p style="margin:0 0 14px;">Digital product. Results may vary. Always consult your pediatrician before changing your baby's diet.</p>
+  <p style="margin:0 0 14px;">Digital product. Results may vary. Always consult your pediatrician before introducing new foods to your baby's diet.</p>
   <div style="display:flex;justify-content:center;gap:20px;flex-wrap:wrap;">
     <a href="#" style="color:#a8a29e;text-decoration:none;">Privacy Policy</a>
     <a href="#" style="color:#a8a29e;text-decoration:none;">Terms of Service</a>
@@ -807,62 +828,59 @@
   </div>
 </footer>
 
-<!-- ══ STICKY BAR — thumb-zone optimized ═════════════════════════ -->
+
+<!-- ══ STICKY BAR ═════════════════════════════════════════════════ -->
 <div id="sticky-bar" style="background:var(--cream);border-top:2px solid var(--sand);box-shadow:0 -6px 24px rgba(0,0,0,.12);">
-  <div style="max-width:520px;margin:0 auto;padding:10px 16px 10px;display:flex;align-items:center;gap:10px;">
+  <div style="max-width:520px;margin:0 auto;padding:10px 16px;display:flex;align-items:center;gap:10px;">
     <div style="flex-shrink:0;display:none;" id="sticky-info">
       <p style="font-weight:900;font-size:13px;color:var(--brown);margin:0;line-height:1.2;">The Baby Foodie</p>
-      <p style="font-size:11px;font-weight:700;color:var(--terra);margin:0;"><span id="spots-sticky">13</span> spots · <span id="sticky-timer" style="color:var(--terra);">--:--</span></p>
+      <p style="font-size:11px;font-weight:700;color:var(--terra);margin:0;"><span id="spots-sticky">13</span> spots · <span id="sticky-timer">--:--</span></p>
     </div>
-    <a href="#order" class="btn-terra btn-pulse" style="flex:1;font-size:15px;padding:14px 20px;min-height:52px;">
-      🛒 GET ACCESS — $17
+    <a href="#order" class="btn btn-pulse" style="flex:1;font-size:15px;padding:14px 20px;min-height:52px;">
+      Give My Baby the Best Start — $17
     </a>
   </div>
 </div>
 
-<!-- ══ Responsive helpers ══════════════════════════════════════════ -->
+
+<!-- ══ RESPONSIVE ════════════════════════════════════════════════ -->
 <style>
   @media (min-width: 640px) {
-    .food-strip { grid-template-columns: repeat(4,1fr) !important; }
-    .food-strip > div { height: 180px !important; }
+    #food-strip { grid-template-columns: repeat(4,1fr) !important; }
+    #food-strip > div { height: 160px !important; }
     #sticky-info { display: block !important; }
-    .cmp-mobile-header { display: none !important; }
-    /* Show laptop mockup, hide phone mockup */
-    .md-hide-on-desktop { display: none !important; }
-    .show-on-desktop { display: block !important; }
-    /* Feature cards in 3 cols */
+    .cmp-mobile-legend { display: none !important; }
+    /* feature cards → 3 cols on wide */
   }
   @media (min-width: 768px) {
-    /* Feature cards row */
-    section > div > div[style*="grid-template-columns:1fr;gap:16px"] {
-      grid-template-columns: repeat(3,1fr) !important;
-    }
+    /* solution feature cards 3-col */
+    .feature-cards { grid-template-columns: repeat(3,1fr) !important; }
   }
 </style>
 
+
 <!-- ══ JAVASCRIPT ═════════════════════════════════════════════════ -->
 <script>
-// ── Countdown timer
+// Countdown
 (function(){
-  var KEY='bf4_end';
+  var KEY='bf5_end';
   var end=parseInt(localStorage.getItem(KEY))||0;
   if(!end||end<Date.now()){end=Date.now()+47*60*1000+33*1000;localStorage.setItem(KEY,end);}
   function pad(n){return String(n).padStart(2,'0');}
   function tick(){
     var d=Math.max(0,end-Date.now());
     var hr=Math.floor(d/3600000),mn=Math.floor((d%3600000)/60000),sc=Math.floor((d%60000)/1000);
-    var e=function(id){return document.getElementById(id);};
-    if(e('th'))e('th').textContent=pad(hr);
-    if(e('tm'))e('tm').textContent=pad(mn);
-    if(e('ts'))e('ts').textContent=pad(sc);
-    if(e('box-timer'))e('box-timer').textContent=pad(hr)+':'+pad(mn)+':'+pad(sc);
-    if(e('sticky-timer'))e('sticky-timer').textContent=pad(mn)+':'+pad(sc);
+    function set(id,v){var e=document.getElementById(id);if(e)e.textContent=v;}
+    set('th',pad(hr)); set('tm',pad(mn)); set('ts',pad(sc));
+    set('box-timer',pad(hr)+':'+pad(mn)+':'+pad(sc));
+    set('sticky-timer',pad(mn)+':'+pad(sc));
+    set('final-timer',pad(mn)+':'+pad(sc));
     if(!d){end=Date.now()+30*60*1000;localStorage.setItem(KEY,end);}
   }
-  tick();setInterval(tick,1000);
+  tick(); setInterval(tick,1000);
 })();
 
-// ── Sticky bar
+// Sticky bar
 (function(){
   var bar=document.getElementById('sticky-bar');
   var cta=document.getElementById('hero-cta');
@@ -870,7 +888,7 @@
   new IntersectionObserver(function(e){bar.classList.toggle('visible',!e[0].isIntersecting);},{threshold:0}).observe(cta);
 })();
 
-// ── FAQ accordion
+// FAQ
 function toggleFaq(btn){
   var body=btn.nextElementSibling;
   var icon=btn.querySelector('.faq-icon');
@@ -880,14 +898,14 @@ function toggleFaq(btn){
   if(!open){body.classList.add('open');icon.textContent='−';icon.style.transform='rotate(180deg)';}
 }
 
-// ── Spots counter
+// Spots counter
 (function(){
   var s=13;
   function dec(){
     if(s>1&&Math.random()<0.4){
       s--;
-      ['spots-top','spots-sticky','spots-box'].forEach(function(id){
-        var el=document.getElementById(id);if(el)el.textContent=s;
+      ['spots-top','spots-sticky','spots-box','spots-final'].forEach(function(id){
+        var el=document.getElementById(id);if(el)el.textContent=id==='spots-box'?s:s;
       });
     }
     setTimeout(dec,Math.random()*80000+40000);
@@ -895,7 +913,7 @@ function toggleFaq(btn){
   setTimeout(dec,60000);
 })();
 
-// ── Smooth scroll
+// Smooth scroll
 document.querySelectorAll('a[href="#order"]').forEach(function(a){
   a.addEventListener('click',function(e){
     e.preventDefault();
