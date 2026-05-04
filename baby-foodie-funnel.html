@@ -343,38 +343,42 @@
 </section>
 
 
-<!-- ══ WHATSAPP SOCIAL PROOF (moved up — right after pain) ════════
-     DESIGN: Authentic chat UI. Screenshot-feel. Captions add context.
-     COPY: Real messages. No editing needed — they're already perfect.
+<!-- ══ REAL SCREENSHOT TESTIMONIALS (6 moms) ══════════════════════
+     DESIGN: Real WhatsApp screenshot images. 2-col mobile / 3-col desktop.
+     COPY: 100% real. Unedited. Zero friction to believe.
 ──────────────────────────────────────────────────────────────── -->
 <section style="background:var(--cream);padding:56px 20px;">
-  <div style="max-width:500px;margin:0 auto;">
+  <div style="max-width:680px;margin:0 auto;">
     <p class="label">Before we show you the solution…</p>
-    <h2 class="h2" style="margin-bottom:6px;">Read What Happened When<br/>3 Moms Stopped Guessing</h2>
-    <p class="sub" style="margin-bottom:24px;">These are real messages. Unedited. Sent by moms who felt exactly what you're feeling right now.</p>
+    <h2 class="h2" style="margin-bottom:6px;">Read What Happened When<br/>6 Moms Stopped Guessing</h2>
+    <p class="sub" style="margin-bottom:28px;">These are real screenshots. Unedited. Sent by moms who felt exactly what you're feeling right now.</p>
 
-    <div class="wa-wrap">
-      <div class="wa-out">How nice to know! I hope you like them and that they help you a lot! Let me know if you have any questions!! 😊</div>
-      <div class="wa-in">
-        <p style="margin:0;">I love it already!!!!! I'm so happy I bought it. It's still 2 months away but I'm here reading everything 🥰</p>
-        <p style="margin:6px 0 0;">Ok, I'll let you know if I need anything.</p>
-        <div class="wa-time">✓✓</div>
+    <!-- 2-col on mobile / 3-col on desktop -->
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:12px;" id="tgrid">
+      <div style="border-radius:16px;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,.12);">
+        <img src="images/t1.jpg" alt="Real testimonial 1" loading="lazy" style="width:100%;display:block;" />
       </div>
-      <div class="wa-in">
-        <p style="margin:0;">Hi, good afternoon!</p>
-        <p style="margin:6px 0 0;">Gabi, I'm shocked by this menu! It's so much better and more complete than I expected… ohh, what care! You've taken care to include the cuts of all the fruits on the menu, the shopping list! Seriously, I'm in love.. how much it's made my life easier, you have no idea!</p>
-        <p style="margin:6px 0 0;">Congratulations on this impeccable work, I've already recommended it to all my friends with babies 🥹😍</p>
-        <div class="wa-time">18:11 ✓✓</div>
+      <div style="border-radius:16px;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,.12);">
+        <img src="images/t2.jpg" alt="Real testimonial 2" loading="lazy" style="width:100%;display:block;" />
       </div>
-      <div class="wa-in">
-        <p style="margin:0;">Hello, Gabi. Good morning!</p>
-        <p style="margin:6px 0 0;">I managed to access the material and found it very practical. I had a lot of doubts about how to start, and especially how to organize myself to prepare meals with variety. <strong>Thank you!! 💙</strong></p>
-        <div class="wa-time">18:11 ✓✓</div>
+      <div style="border-radius:16px;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,.12);">
+        <img src="images/t3.jpg" alt="Real testimonial 3" loading="lazy" style="width:100%;display:block;" />
+      </div>
+      <div style="border-radius:16px;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,.12);">
+        <img src="images/t4.jpg" alt="Real testimonial 4" loading="lazy" style="width:100%;display:block;" />
+      </div>
+      <div style="border-radius:16px;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,.12);">
+        <img src="images/t5.jpg" alt="Real testimonial 5" loading="lazy" style="width:100%;display:block;" />
+      </div>
+      <div style="border-radius:16px;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,.12);">
+        <img src="images/t6.jpg" alt="Real testimonial 6" loading="lazy" style="width:100%;display:block;" />
       </div>
     </div>
 
-    <p style="text-align:center;font-size:13px;color:#a8a29e;font-weight:600;margin:16px 0 24px;">Real messages from real moms — who were right where you are now.</p>
-    <a href="#order" class="btn btn-sm btn-pulse" style="max-width:360px;margin:0 auto;">I Want to Feel That Relief Too →</a>
+    <p style="text-align:center;font-size:13px;color:#a8a29e;font-weight:600;margin:20px 0 28px;">Real messages from real moms — who were right where you are now.</p>
+    <div style="max-width:380px;margin:0 auto;">
+      <a href="#order" class="btn btn-sm btn-pulse">I Want to Feel That Relief Too →</a>
+    </div>
   </div>
 </section>
 
@@ -854,7 +858,7 @@
     #food-strip > div { height: 160px !important; }
     #sticky-info { display: block !important; }
     .cmp-mobile-legend { display: none !important; }
-    /* feature cards → 3 cols on wide */
+    #tgrid { grid-template-columns: repeat(3,1fr) !important; }
   }
   @media (min-width: 768px) {
     /* solution feature cards 3-col */
