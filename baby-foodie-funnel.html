@@ -62,15 +62,9 @@
     .wa-in  { background: #fff; border-radius: 0 12px 12px 12px; padding: 11px 14px; max-width: 90%; box-shadow: 0 1px 3px rgba(0,0,0,.15); font-size: 14px; line-height: 1.6; color: #1a1a1a; }
     .wa-time { font-size: 11px; color: #aaa; text-align: right; margin-top: 4px; }
 
-    /* ── COUNTDOWN ────────────────────────────── */
-    .timer-seg { background: var(--brown); color: #f4ede0; border-radius: 10px; min-width: 56px; padding: 8px 6px; text-align: center; }
-
-    /* ── SHIMMER ──────────────────────────────── */
-    @keyframes shimmer { 0%{background-position:-200% 0} 100%{background-position:200% 0} }
+    /* ── SHIMMER (price display) ──────────────── */
     .shimmer-price {
-      background: linear-gradient(90deg, var(--terra) 25%, #e8a87c 50%, var(--terra) 75%);
-      background-size: 200% auto; -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-      animation: shimmer 3s linear infinite;
+      color: var(--terra); font-weight: 900;
     }
 
     /* ── FLOAT ────────────────────────────────── */
@@ -129,7 +123,6 @@
     .sec { padding: 56px 20px; }
     .inner { max-width: 640px; margin: 0 auto; }
     .inner-sm { max-width: 480px; margin: 0 auto; }
-    .progress-fill { height: 100%; border-radius: 50px; background: linear-gradient(90deg,var(--terra-l),var(--terra)); width: 87%; }
     .guarantee-badge { width: 110px; height: 110px; border-radius: 50%; border: 5px solid var(--terra); background: var(--cream); display: flex; flex-direction: column; align-items: center; justify-content: center; box-shadow: 0 8px 24px rgba(200,98,74,.2); flex-shrink: 0; }
 
     /* Urgency inline strip */
@@ -197,16 +190,9 @@
       <span style="background:var(--sand);color:var(--brown);font-size:12px;font-weight:800;padding:6px 14px;border-radius:50px;">🌍 74 Countries</span>
     </div>
 
-    <!-- Countdown -->
-    <div style="text-align:center;margin-bottom:24px;">
-      <p style="font-size:11px;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:var(--terra);margin:0 0 10px;">⏰ This price disappears in:</p>
-      <div style="display:flex;gap:8px;align-items:center;justify-content:center;">
-        <div class="timer-seg"><div style="font-size:26px;font-weight:900;line-height:1;" id="th">00</div><div style="font-size:10px;opacity:.6;margin-top:3px;">HRS</div></div>
-        <span style="font-size:26px;font-weight:900;color:var(--terra);">:</span>
-        <div class="timer-seg"><div style="font-size:26px;font-weight:900;line-height:1;" id="tm">47</div><div style="font-size:10px;opacity:.6;margin-top:3px;">MIN</div></div>
-        <span style="font-size:26px;font-weight:900;color:var(--terra);">:</span>
-        <div class="timer-seg"><div style="font-size:26px;font-weight:900;line-height:1;" id="ts">00</div><div style="font-size:10px;opacity:.6;margin-top:3px;">SEC</div></div>
-      </div>
+    <!-- Honest urgency — no fake timer -->
+    <div style="background:#fff3f0;border-radius:12px;padding:12px 18px;margin-bottom:24px;border-left:4px solid var(--terra);text-align:left;max-width:460px;margin-left:auto;margin-right:auto;">
+      <p style="font-size:14px;font-weight:800;color:#7a3020;margin:0;line-height:1.5;">🌱 Your baby is growing right now — this window doesn't wait. Get instant access for $17.</p>
     </div>
 
     <!-- PRIMARY CTA -->
@@ -532,7 +518,7 @@
     </div>
 
     <a href="#order" class="btn btn-pulse">Give My Baby the Best Start — $17</a>
-    <p style="text-align:center;font-size:12px;color:#a8a29e;margin:10px 0 0;">⚠️ This price disappears when the timer hits zero.</p>
+    <p style="text-align:center;font-size:12px;color:#a8a29e;margin:10px 0 0;">🔒 Instant access · 30-day money-back guarantee</p>
   </div>
 </section>
 
@@ -657,25 +643,14 @@
           <p style="color:#a8a29e;font-size:13px;font-weight:600;margin:0;">If sold separately, this would cost:</p>
           <p style="color:#d4cec8;font-size:24px;font-weight:900;text-decoration:line-through;margin:2px 0 10px;">$195</p>
           <div style="height:1px;background:#ede8e0;margin:0 0 10px;"></div>
-          <p style="color:#78716c;font-size:13px;font-weight:700;margin:0 0 4px;">Your price today — before the timer runs out:</p>
+          <p style="color:#78716c;font-size:13px;font-weight:700;margin:0 0 4px;">Your price today — available until May 15th:</p>
           <p class="shimmer-price" style="font-size:68px;font-weight:900;line-height:1;margin:0;">$17</p>
           <p style="color:#16a34a;font-weight:900;font-size:13px;margin:8px 0 0;">You save $178 · That's 96% off</p>
         </div>
 
-        <!-- Scarcity -->
-        <div style="margin-bottom:16px;">
-          <div style="display:flex;justify-content:space-between;font-size:12px;font-weight:900;color:#78716c;margin-bottom:6px;">
-            <span>🔥 Spots claimed at this price</span>
-            <span style="color:var(--terra);">87% gone</span>
-          </div>
-          <div style="background:#e7e5e4;border-radius:50px;height:14px;overflow:hidden;"><div class="progress-fill"></div></div>
-          <p style="font-size:11px;color:#a8a29e;margin:6px 0 0;">Only <strong style="color:var(--terra);"><span id="spots-box">13</span> spots</strong> at $17. Price doubles when the timer hits zero.</p>
-        </div>
-
-        <!-- Timer in box -->
-        <div style="display:flex;align-items:center;justify-content:center;gap:8px;background:#faf9f6;border-radius:12px;padding:12px;margin-bottom:20px;">
-          <p style="font-size:12px;font-weight:900;color:#78716c;margin:0;">⏰ This price expires in:</p>
-          <p style="font-weight:900;font-size:18px;color:var(--terra);margin:0;" id="box-timer">--:--:--</p>
+        <!-- Honest deadline -->
+        <div style="background:#fff3f0;border-radius:12px;padding:14px 16px;margin-bottom:20px;border-left:4px solid var(--terra);">
+          <p style="font-size:13px;font-weight:800;color:#7a3020;margin:0;line-height:1.5;">🌱 Your baby is growing right now — this window doesn't wait. Get instant access for $17.</p>
         </div>
 
         <!-- THE CTA -->
@@ -857,9 +832,9 @@
     <p style="color:#b2d8b5;font-size:16px;line-height:1.7;margin:0 auto 10px;max-width:380px;">You wake up. You open the plan. You know exactly what you're making. Your baby eats something new, something colorful, something safe.</p>
     <p style="color:#fff;font-size:16px;font-weight:800;line-height:1.6;margin:0 auto 28px;max-width:380px;">That's what 9,000+ moms unlocked for $17. Today, it's your turn.</p>
 
-    <!-- Urgency thread #3 — final -->
+    <!-- Honest close -->
     <div style="background:rgba(255,255,255,.1);border-radius:14px;padding:14px 18px;margin-bottom:24px;">
-      <p style="color:#fde8e4;font-size:13px;font-weight:800;margin:0;">⏳ <span id="spots-final">13 spots</span> left at $17 · Timer: <span id="final-timer" style="color:#fff;">--:--</span></p>
+      <p style="color:#fde8e4;font-size:13px;font-weight:800;margin:0;">🌱 Your baby is growing right now — this window doesn't wait. Get instant access for $17.</p>
     </div>
 
     <a href="#order" class="btn btn-pulse" style="background:var(--terra);max-width:420px;margin:0 auto;font-size:18px;">Give My Baby the Best Start — $17</a>
@@ -886,7 +861,7 @@
   <div style="max-width:520px;margin:0 auto;padding:10px 16px;display:flex;align-items:center;gap:10px;">
     <div style="flex-shrink:0;display:none;" id="sticky-info">
       <p style="font-weight:900;font-size:13px;color:var(--brown);margin:0;line-height:1.2;">The Baby Foodie</p>
-      <p style="font-size:11px;font-weight:700;color:var(--terra);margin:0;"><span id="spots-sticky">13</span> spots · <span id="sticky-timer">--:--</span></p>
+      <p style="font-size:11px;font-weight:700;color:var(--terra);margin:0;">$17 · Until May 15th</p>
     </div>
     <a href="#order" class="btn btn-pulse" style="flex:1;font-size:15px;padding:14px 20px;min-height:52px;">
       Give My Baby the Best Start — $17
@@ -914,24 +889,6 @@
 
 <!-- ══ JAVASCRIPT ═════════════════════════════════════════════════ -->
 <script>
-// Countdown
-(function(){
-  var KEY='bf5_end';
-  var end=parseInt(localStorage.getItem(KEY))||0;
-  if(!end||end<Date.now()){end=Date.now()+47*60*1000+33*1000;localStorage.setItem(KEY,end);}
-  function pad(n){return String(n).padStart(2,'0');}
-  function tick(){
-    var d=Math.max(0,end-Date.now());
-    var hr=Math.floor(d/3600000),mn=Math.floor((d%3600000)/60000),sc=Math.floor((d%60000)/1000);
-    function set(id,v){var e=document.getElementById(id);if(e)e.textContent=v;}
-    set('th',pad(hr)); set('tm',pad(mn)); set('ts',pad(sc));
-    set('box-timer',pad(hr)+':'+pad(mn)+':'+pad(sc));
-    set('sticky-timer',pad(mn)+':'+pad(sc));
-    set('final-timer',pad(mn)+':'+pad(sc));
-    if(!d){end=Date.now()+30*60*1000;localStorage.setItem(KEY,end);}
-  }
-  tick(); setInterval(tick,1000);
-})();
 
 // Sticky bar
 (function(){
@@ -951,20 +908,6 @@ function toggleFaq(btn){
   if(!open){body.classList.add('open');icon.textContent='−';icon.style.transform='rotate(180deg)';}
 }
 
-// Spots counter
-(function(){
-  var s=13;
-  function dec(){
-    if(s>1&&Math.random()<0.4){
-      s--;
-      ['spots-top','spots-sticky','spots-box','spots-final'].forEach(function(id){
-        var el=document.getElementById(id);if(el)el.textContent=id==='spots-box'?s:s;
-      });
-    }
-    setTimeout(dec,Math.random()*80000+40000);
-  }
-  setTimeout(dec,60000);
-})();
 
 // Testimonial carousel
 (function(){
