@@ -789,7 +789,7 @@
         </div>
 
         <!-- THE CTA -->
-        <a href="#" class="btn btn-pulse" style="font-size:18px;margin-bottom:10px;">Give My Baby the Best Start — $17</a>
+        <a href="https://go.centerpag.com/PPU38CQBF8H" target="_blank" rel="noopener noreferrer" class="btn btn-pulse" style="font-size:18px;margin-bottom:10px;">Give My Baby the Best Start — $17</a>
         <p style="text-align:center;font-size:11px;color:#a8a29e;margin:0 0 10px;">🔒 256-bit SSL · Instant email delivery · Works on any device</p>
         <div style="display:flex;justify-content:center;gap:6px;opacity:.35;flex-wrap:wrap;">
           <span style="font-size:11px;background:#e7e5e4;padding:3px 8px;border-radius:4px;font-weight:900;">VISA</span>
@@ -1109,13 +1109,11 @@ function toggleFaq(btn){
   });
 })();
 
-// Smooth scroll
+// CTA — all #order links go to checkout
 document.querySelectorAll('a[href="#order"]').forEach(function(a){
-  a.addEventListener('click',function(e){
-    e.preventDefault();
-    var t=document.getElementById('order');
-    if(t)t.scrollIntoView({behavior:'smooth'});
-  });
+  a.setAttribute('href','https://go.centerpag.com/PPU38CQBF8H');
+  a.setAttribute('target','_blank');
+  a.setAttribute('rel','noopener noreferrer');
 });
 </script>
 </body>
