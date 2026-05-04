@@ -1109,11 +1109,13 @@ function toggleFaq(btn){
   });
 })();
 
-// CTA — all #order links go to checkout
+// All #order buttons scroll smoothly to the offer section
 document.querySelectorAll('a[href="#order"]').forEach(function(a){
-  a.setAttribute('href','https://go.centerpag.com/PPU38CQBF8H');
-  a.setAttribute('target','_blank');
-  a.setAttribute('rel','noopener noreferrer');
+  a.addEventListener('click',function(e){
+    e.preventDefault();
+    var t=document.getElementById('order');
+    if(t)t.scrollIntoView({behavior:'smooth'});
+  });
 });
 </script>
 </body>
