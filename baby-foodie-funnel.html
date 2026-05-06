@@ -809,7 +809,7 @@
         </ul>
 
         <!-- Price display -->
-        <div style="background:#faf9f6;border-radius:16px;padding:20px;text-align:center;border:1px solid #ede8e0;margin-bottom:18px;">
+        <div id="price-anchor" style="background:#faf9f6;border-radius:16px;padding:20px;text-align:center;border:1px solid #ede8e0;margin-bottom:18px;">
           <p style="color:#a8a29e;font-size:13px;font-weight:600;margin:0;">If sold separately, this would cost:</p>
           <p style="color:#d4cec8;font-size:24px;font-weight:900;text-decoration:line-through;margin:2px 0 10px;">$195</p>
           <div style="height:1px;background:#ede8e0;margin:0 0 10px;"></div>
@@ -1133,12 +1133,15 @@ function toggleFaq(btn){
   });
 })();
 
-// All #order buttons scroll smoothly to the offer section
+// All #order buttons scroll smoothly to the price box
 document.querySelectorAll('a[href="#order"]').forEach(function(a){
   a.addEventListener('click',function(e){
     e.preventDefault();
-    var t=document.getElementById('order');
-    if(t)t.scrollIntoView({behavior:'smooth'});
+    var t=document.getElementById('price-anchor');
+    if(t){
+      var offset=t.getBoundingClientRect().top+window.pageYOffset-24;
+      window.scrollTo({top:offset,behavior:'smooth'});
+    }
   });
 });
 </script>
